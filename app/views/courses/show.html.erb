@@ -1,0 +1,19 @@
+
+  <%= @class.title %>
+    <table>
+      <tr>
+        <th>Student</th>
+        <th>E-mail</th>
+        <th>Role</th>
+        <th>Paid?</th>
+      </tr>
+      <% @class.students.each do |student| %>
+        <tr>
+          <td><%= student.first_name %> <%= student.last_name %></td>
+          <td><%= student.email %></td>
+          <td><%= student.registrations.where(course_id: params[:id]).first.role %></td>
+          <td><%= student.registrations.where(course_id: params[:id]).first.paid %></td>
+        </tr>
+      <% end %>
+    </table>
+  <br><br><%= link_to 'Back to classes list', courses_path %>

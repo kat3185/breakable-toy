@@ -1,0 +1,20 @@
+hi!
+
+
+<%= form_for [@student, @registration] do |f| %>
+
+
+
+<%= f.radio_button(:role, 'Lead') %>
+<%= f.label(:role, 'Lead', value: 'Lead') %>
+
+<%= f.radio_button(:role, 'Follow') %>
+<%= f.label(:role, 'Follow', value: 'Follow') %>
+
+
+
+
+
+
+<%= f.submit 'Register for these classes' %>
+<% end %>
