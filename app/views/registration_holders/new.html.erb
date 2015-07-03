@@ -1,0 +1,16 @@
+<%= form_for [@student, @registration_holder] do |f| %>
+
+<%= f.label(:first_role, "#{@current_courses[0].title}") %>
+<%= f.select(:first_role, ["None", "Lead", "Follow"]) %>
+
+  <%= f.label(:second_role, "#{@current_courses[1].title}") %>
+  <%= f.select(:second_role, ["None", "Lead", "Follow"]) %>
+
+  <%= f.label(:third_role, "#{@current_courses[2].title}") %>
+  <%= f.select(:third_role, ["None", "Lead", "Follow"]) %>
+
+  <%= f.label(:fourth_role, "#{@current_courses[3].title}") %>
+  <%= f.select(:fourth_role, ["None", "Lead", "Follow"]) %>
+
+  <%= f.submit 'Register for these classes' %>
+<% end %>

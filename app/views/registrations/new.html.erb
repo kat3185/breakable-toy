@@ -1,20 +1,13 @@
 hi!
 
+<%= form_for [@student, @registration_roster] do |f| %>
 
-<%= form_for [@student, @registration] do |f| %>
+  <%= f.label :first %>
 
-
-
-<%= f.radio_button(:role, 'Lead') %>
-<%= f.label(:role, 'Lead', value: 'Lead') %>
-
-<%= f.radio_button(:role, 'Follow') %>
-<%= f.label(:role, 'Follow', value: 'Follow') %>
-
-
-
-
-
+  <%= f.check_box(:first_course) %>
+  <%= f.label(:first_course, "Lead", value: "Lead") %>
+  <%= f.check_box(:first_course) %>
+  <%= f.label(:first_course, "Follow", value: "Follow") %>
 
 <%= f.submit 'Register for these classes' %>
 <% end %>

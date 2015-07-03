@@ -1,8 +1,10 @@
 class CoursesController < ApplicationController
 
   def index
-    @classes = Course.all[-4..-1]
-    # @classes = Course.all
+    @current_monday_courses = MeetingDate.all[-4].courses
+    @current_tuesday_courses = MeetingDate.all[-3].courses
+    @upcoming_monday_courses = MeetingDate.all[-2].courses
+    @upcoming_tuesday_courses = MeetingDate.all[-1].courses
   end
 
   def show

@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :courses, only: [:index, :show]
+  resources :registrations, only: [:destroy]
+
 
   resources :students, only: [:new, :index, :create] do
-    resources :registrations, only: [:new, :index, :create]
+    resources :registration_holders, only: [:new, :index, :create]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

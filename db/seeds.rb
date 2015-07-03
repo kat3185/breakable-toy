@@ -14,6 +14,14 @@ Course.create(title: "Lindy 1B", description: "Basic charleston!", time: "7:30-8
 Course.create(title: "Lindy 2B", description: "Mixing 6 and 8 count", time: "8:30-9:30pm", venue_id: 1)
 Course.create(title: "Lindy 1A second", description: "Eight count!", time: "7:30-8:30pm", venue_id: 1)
 Course.create(title: "Lindy 2C", description: "Swingout Variations!", time: "8:30-9:30pm", venue_id: 1)
+
+Course.create(title: "Lindy 2C", description: "Swingout Variations!", time: "7:00-8:00pm", venue_id: 1)
+Course.create(title: "Lindy 1B", description: "Basic charleston!", time: "8:00-9:00pm", venue_id: 1)
+Course.create(title: "Lindy 2A", description: "Charleston variations!", time: "7:00-8:00pm", venue_id: 1)
+Course.create(title: "Lindy 1A", description: "Eight count!", time: "8:00-9:00pm", venue_id: 1)
+Course.create(title: "Lindy 2B", description: "Mixing 6 and 8 count", time: "7:00-8:00pm", venue_id: 1)
+Course.create(title: "Lindy 1B", description: "Basic charleston!", time: "8:00-9:00pm", venue_id: 1)
+
 puts "Created classes."
 
 Instructor.create(full_name: "Cari Meisel", bio: "Very very very short.", email: "Cmeis@nss.com")
@@ -60,16 +68,40 @@ d10 = Date.new(2015, 9, 8)
 d11 = Date.new(2015, 9, 15)
 d12 = Date.new(2015, 9, 22)
 
+d13 = Date.new(2015, 7, 6)
+d14 = Date.new(2015, 7, 13)
+d15 = Date.new(2015, 7, 20)
+d16 = Date.new(2015, 7, 27)
+
+d17 = Date.new(2015, 8, 3)
+d18 = Date.new(2015, 8, 10)
+d19 = Date.new(2015, 8, 17)
+d20 = Date.new(2015, 8, 24)
+
+d21 = Date.new(2015, 8, 31)
+d22 = Date.new(2015, 9, 7)
+d23 = Date.new(2015, 9, 14)
+d24 = Date.new(2015, 9, 21)
+
+MeetingDate.create(first: d13, second: d14, third: d15, fourth: d16)
 MeetingDate.create(first: d1, second: d2, third: d3, fourth: d4)
+MeetingDate.create(first: d17, second: d18, third: d19, fourth: d20)
 MeetingDate.create(first: d5, second: d6, third: d7, fourth: d8)
+MeetingDate.create(first: d21, second: d22, third: d23, fourth: d24)
 MeetingDate.create(first: d9, second: d10, third: d11, fourth: d12)
 
 puts "Created meeting dates."
 
-CourseMeeting.create(course_id: 1, meeting_date_id: 1)
-CourseMeeting.create(course_id: 2, meeting_date_id: 1)
-CourseMeeting.create(course_id: 3, meeting_date_id: 2)
-CourseMeeting.create(course_id: 4, meeting_date_id: 2)
-CourseMeeting.create(course_id: 5, meeting_date_id: 3)
-CourseMeeting.create(course_id: 6, meeting_date_id: 3)
+CourseMeeting.create(course_id: 7, meeting_date_id: 1)
+CourseMeeting.create(course_id: 8, meeting_date_id: 1)
+CourseMeeting.create(course_id: 1, meeting_date_id: 2)
+CourseMeeting.create(course_id: 2, meeting_date_id: 2)
+CourseMeeting.create(course_id: 9, meeting_date_id: 3)
+CourseMeeting.create(course_id: 10, meeting_date_id: 3)
+CourseMeeting.create(course_id: 3, meeting_date_id: 4)
+CourseMeeting.create(course_id: 4, meeting_date_id: 4)
+CourseMeeting.create(course_id: 11, meeting_date_id: 5)
+CourseMeeting.create(course_id: 12, meeting_date_id: 5)
+CourseMeeting.create(course_id: 5, meeting_date_id: 6)
+CourseMeeting.create(course_id: 6, meeting_date_id: 6)
 puts "Created course meetings."
