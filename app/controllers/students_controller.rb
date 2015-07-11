@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   def new
-    binding.pry
     @student = Student.new
+    @month = params[:month]
   end
   def index
   end

@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20150703014940) do
     t.integer  "fifth_course"
     t.integer  "sixth_course"
     t.integer  "student_id"
+    t.integer  "month"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

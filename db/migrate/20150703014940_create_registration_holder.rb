@@ -14,6 +14,7 @@ class CreateRegistrationHolder < ActiveRecord::Migration
       t.integer :fifth_course
       t.integer :sixth_course
       t.integer :student_id
+      t.integer :month
 
       t.timestamps
     end
