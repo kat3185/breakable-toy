@@ -31,5 +31,7 @@
     <%= f.label(:fourth_role, "#{@next_month.second.courses.second.title}") %>
     <%= f.select(:fourth_role, ["None", "Lead", "Follow"]) %>
 
+    <%= f.hidden_field(:month, value: @next_month.first.third.month.to_s) %>
+
   <%= f.submit 'Register for these classes' %>
 <% end %>
