@@ -1,0 +1,25 @@
+<h1>Student Info</h1>
+
+<table>
+  <tr>
+    <th>Student</th>
+    <th>E-mail</th>
+    <th>Course Count</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <% @students.each do |student| %>
+    <tr>
+      <td><%= link_to student.full_name, student_path(student.id) %></td>
+      <td><%= student.email %></td>
+      <td><%= student.courses.count %></td>
+      <td>Edit</td>
+      <td>
+        <%= link_to 'Delete',
+          student_path(student.id),
+          method: :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br><br><%= link_to 'Back to classes list', courses_path %>

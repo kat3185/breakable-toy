@@ -17,11 +17,16 @@
       <%= course.meeting_dates.first.third.strftime('%B %e') if course.meeting_dates.first.third %>,
       <%= course.meeting_dates.first.fourth.strftime('%B %e') if course.meeting_dates.first.fourth %>
 
-      Leads: <%= (course.registrations.map { |student| student.role }).count("Lead") %>
-      Follows: <%= (course.registrations.map { |student| student.role }).count("Follow") %>
+      Leads: <%= (course.course_registrations.map { |student| student.role }).count("Lead") %>
+      Follows: <%= (course.course_registrations.map { |student| student.role }).count("Follow") %>
       <br><br>
     <%end%>
   <% end %>
-  <%= button_to "Register for #{month.first.second.strftime('%B')} classes", new_student_path, method: :get %>
+
+  <% if current_user && current_user.student %>
+    <%= button_to "Register for #{month.first.second.strftime('%B')} classes", new_student_course_registration_holder_path(current_user.student.id), method: :get %>
+  <%else%>
+    <%= button_to "Register for #{month.first.second.strftime('%B')} classes", new_student_path, method: :get %>
+  <%end%>
   <br><br>
 <% end %>

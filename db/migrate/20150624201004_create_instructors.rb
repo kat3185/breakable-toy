@@ -6,6 +6,7 @@ class CreateInstructors < ActiveRecord::Migration
       t.string :email, null: false
       t.string :photo_url
       t.string :video_url
+      t.integer :user_id
 
       t.timestamps
     end

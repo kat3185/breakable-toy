@@ -12,11 +12,11 @@
         <tr>
           <td><%= link_to student.full_name, student_path(student.id) %></td>
           <td><%= student.email %></td>
-          <td><%= student.registrations.where(course_id: params[:id]).first.role %></td>
-          <td><%= student.registrations.where(course_id: params[:id]).first.paid %></td>
+          <td><%= student.course_registrations.where(course_id: params[:id]).first.role %></td>
+          <td><%= student.course_registrations.where(course_id: params[:id]).first.paid %></td>
           <td>
             <%= link_to 'Delete',
-              registration_path(student.registrations.where(course_id: params[:id]).first.id),
+              course_registration_path(student.course_registrations.where(course_id: params[:id]).first.id),
               method: :delete %>
           </td>
         </tr>

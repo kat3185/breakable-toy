@@ -13,11 +13,11 @@
     <tr>
       <td><%= course.title %></td>
       <td><%= course.meeting_dates.first.second.strftime('%B') %></td>
-      <td><%= course.registrations.where(student_id: params[:id]).first.role %></td>
-      <td><%= course.registrations.where(student_id: params[:id]).first.paid %></td>
+      <td><%= course.course_registrations.where(student_id: params[:id]).first.role %></td>
+      <td><%= course.course_registrations.where(student_id: params[:id]).first.paid %></td>
       <td>
         <%= link_to 'Delete',
-          registration_path(course.registrations.where(student_id: params[:id]).first.id),
+          course_registration_path(course.course_registrations.where(student_id: params[:id]).first.id),
           method: :delete %>
       </td>
     </tr>

@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :courses, only: [:index, :show]
-  resources :registrations, only: [:destroy]
+  resources :course_registrations, only: [:destroy]
 
   resources :students, only: [:new, :create] do
-    resources :registration_holders, only: [:new, :index, :create]
+    resources :course_registration_holders, only: [:new, :index, :create]
   end
 
-  resources :students, only: [:index, :show]
+  resources :students, only: [:index, :show, :destroy]
 end

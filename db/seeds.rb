@@ -35,16 +35,16 @@ Student.create(first_name: "Vera", last_name: 'Fomenkov', email: "SlythrinAlong@
 Student.create(first_name: "Zach", last_name: 'Brass', email: "Ambidancer@gmail.com")
 puts "Created students."
 
-Registration.create(course_id: 1, student_id: 1, role: "Lead", paid: true)
-Registration.create(course_id: 1, student_id: 2, role: "Follow")
-Registration.create(course_id: 1, student_id: 3, role: "Follow", paid: true)
-Registration.create(course_id: 2, student_id: 4, role: "Follow", paid: true)
-Registration.create(course_id: 2, student_id: 1, role: "Lead", paid: true)
-Registration.create(course_id: 3, student_id: 1, role: "Lead", paid: true)
-Registration.create(course_id: 3, student_id: 2, role: "Follow")
-Registration.create(course_id: 3, student_id: 3, role: "Follow", paid: true)
-Registration.create(course_id: 4, student_id: 4, role: "Follow", paid: true)
-Registration.create(course_id: 4, student_id: 1, role: "Lead", paid: true)
+CourseRegistration.create(course_id: 1, student_id: 1, role: "Lead", paid: true)
+CourseRegistration.create(course_id: 1, student_id: 2, role: "Follow")
+CourseRegistration.create(course_id: 1, student_id: 3, role: "Follow", paid: true)
+CourseRegistration.create(course_id: 2, student_id: 4, role: "Follow", paid: true)
+CourseRegistration.create(course_id: 2, student_id: 1, role: "Lead", paid: true)
+CourseRegistration.create(course_id: 3, student_id: 1, role: "Lead", paid: true)
+CourseRegistration.create(course_id: 3, student_id: 2, role: "Follow")
+CourseRegistration.create(course_id: 3, student_id: 3, role: "Follow", paid: true)
+CourseRegistration.create(course_id: 4, student_id: 4, role: "Follow", paid: true)
+CourseRegistration.create(course_id: 4, student_id: 1, role: "Lead", paid: true)
 puts "Created registrations."
 
 CourseInstructor.create(course_id:1, instructor_id: 1)
