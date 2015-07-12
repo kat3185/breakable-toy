@@ -22,6 +22,6 @@
       <br><br>
     <%end%>
   <% end %>
-  <%= button_to "Register for #{month.first.second.strftime('%B')} classes", new_student_path, method: :get, params: {month: Date.today.month} %>
+  <%= button_to "Register for #{month.first.second.strftime('%B')} classes", new_student_path, method: :get %>
   <br><br>
 <% end %>

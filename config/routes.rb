@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :registrations, only: [:destroy]
 
 
-  resources :students, only: [:new, :index, :create] do
+  resources :students, only: [:new, :index, :create, :show] do
     resources :registration_holders, only: [:new, :index, :create]
   end
   # The priority is based upon order of creation: first created -> highest priority.

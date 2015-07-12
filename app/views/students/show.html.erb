@@ -1,0 +1,26 @@
+<%= @student.full_name %><br>
+<%= @student.email %>
+<br>
+<table>
+  <tr>
+    <th>Classes</th>
+    <th>Month</th>
+    <th>Role</th>
+    <th>Paid?</th>
+    <th>Delete</th>
+  </tr>
+  <% @student.courses.each do |course| %>
+    <tr>
+      <td><%= course.title %></td>
+      <td><%= course.meeting_dates.first.second.strftime('%B') %></td>
+      <td><%= course.registrations.where(student_id: params[:id]).first.role %></td>
+      <td><%= course.registrations.where(student_id: params[:id]).first.paid %></td>
+      <td>
+        <%= link_to 'Delete',
+          registration_path(course.registrations.where(student_id: params[:id]).first.id),
+          method: :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<br><br><%= link_to 'Back to classes list', courses_path %>

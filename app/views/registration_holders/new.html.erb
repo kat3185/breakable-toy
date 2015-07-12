@@ -1,37 +1,37 @@
 <%= form_for [@student, @registration_holder] do |f| %>
 
-    <%= f.label(:first_role, "#{@this_month.first.courses.first.title}") %>
-    <%= f.select(:first_role, ["None", "Lead", "Follow"]) %>
+  <%= f.label(:first_role, "#{@this_month.first.courses.first.title}") %>
+  <%= f.select(:first_role, ["None", "Lead", "Follow"]) %>
 
-    <%= f.label(:second_role, "#{@this_month.first.courses.second.title}") %>
-    <%= f.select(:second_role, ["None", "Lead", "Follow"]) %>
+  <%= f.label(:second_role, "#{@this_month.first.courses.second.title}") %>
+  <%= f.select(:second_role, ["None", "Lead", "Follow"]) %>
 
-    <%= f.label(:third_role, "#{@this_month.second.courses.first.title}") %>
-    <%= f.select(:third_role, ["None", "Lead", "Follow"]) %>
+  <%= f.label(:third_role, "#{@this_month.second.courses.first.title}") %>
+  <%= f.select(:third_role, ["None", "Lead", "Follow"]) %>
 
-    <%= f.label(:fourth_role, "#{@this_month.second.courses.second.title}") %>
-    <%= f.select(:fourth_role, ["None", "Lead", "Follow"]) %>
+  <%= f.label(:fourth_role, "#{@this_month.second.courses.second.title}") %>
+  <%= f.select(:fourth_role, ["None", "Lead", "Follow"]) %>
 
-    <%= f.hidden_field(:month, value: @this_month.first.third.month.to_s) %>
+  <%= f.hidden_field(:month, value: @this_month.first.third.month.to_s) %>
 
-  <%= f.submit 'Register for these classes' %>
+  <%= f.submit "Register for #{@this_month.first.second.strftime('%B')} Classes" %>
 <% end %>
-
+<br><br>
 <%= form_for [@student, @registration_holder] do |f| %>
 
-    <%= f.label(:first_role, "#{@next_month.first.courses.first.title}") %>
-    <%= f.select(:first_role, ["None", "Lead", "Follow"]) %>
+  <%= f.label(:first_role, "#{@next_month.first.courses.first.title}") %>
+  <%= f.select(:first_role, ["None", "Lead", "Follow"]) %>
 
-    <%= f.label(:second_role, "#{@next_month.first.courses.second.title}") %>
-    <%= f.select(:second_role, ["None", "Lead", "Follow"]) %>
+  <%= f.label(:second_role, "#{@next_month.first.courses.second.title}") %>
+  <%= f.select(:second_role, ["None", "Lead", "Follow"]) %>
 
-    <%= f.label(:third_role, "#{@next_month.second.courses.first.title}") %>
-    <%= f.select(:third_role, ["None", "Lead", "Follow"]) %>
+  <%= f.label(:third_role, "#{@next_month.second.courses.first.title}") %>
+  <%= f.select(:third_role, ["None", "Lead", "Follow"]) %>
 
-    <%= f.label(:fourth_role, "#{@next_month.second.courses.second.title}") %>
-    <%= f.select(:fourth_role, ["None", "Lead", "Follow"]) %>
+  <%= f.label(:fourth_role, "#{@next_month.second.courses.second.title}") %>
+  <%= f.select(:fourth_role, ["None", "Lead", "Follow"]) %>
 
-    <%= f.hidden_field(:month, value: @next_month.first.third.month.to_s) %>
+  <%= f.hidden_field(:month, value: @next_month.first.third.month.to_s) %>
 
-  <%= f.submit 'Register for these classes' %>
+  <%= f.submit "Register for #{@next_month.first.second.strftime('%B')} Classes" %>
 <% end %>
