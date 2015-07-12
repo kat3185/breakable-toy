@@ -1,8 +1,9 @@
 class StudentsController < ApplicationController
+
   def new
     @student = Student.new
-    @month = params[:month]
   end
+  
   def index
   end
 
