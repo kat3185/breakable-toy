@@ -1,6 +1,6 @@
 ![Build Status](https://codeship.com/projects/6de31910-0bde-0133-93f5-0eda17052741/status?branch=master)
 ![Code Climate](https://codeclimate.com/github/kat3185/breakable-toy.png)
-![Coverage Status](https://coveralls.io/repos/kat3185/breakable-toy/badge.png)
+[![Coverage Status](https://coveralls.io/repos/kat3185/breakable-toy/badge.svg)](https://coveralls.io/r/kat3185/breakable-toy)
 
 As a user
 I want to visit the homepage
