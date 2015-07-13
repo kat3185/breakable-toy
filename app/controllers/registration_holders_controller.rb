@@ -2,7 +2,9 @@ class RegistrationHoldersController < ApplicationController
   def new
     @registration_holder = RegistrationHolder.new(student_id: params[:student_id])
     @student = Student.find(params[:student_id])
-    @current_courses = MeetingDate.all[-4..-3].map {|day| day.courses}.flatten!
+    @this_month = MeetingDate.where('extract(month from first) = ?', Date.today.month)
+    @next_month = MeetingDate.where('extract(month from first) = ?', Date.today.month.next)
+
   end
 
   def create
@@ -23,6 +25,7 @@ class RegistrationHoldersController < ApplicationController
                                                 :third_role,
                                                 :fourth_role,
                                                 :fifth_role,
-                                                :sixth_role)
+                                                :sixth_role,
+                                                :month)
   end
 end

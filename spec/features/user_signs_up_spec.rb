@@ -23,6 +23,7 @@ feature 'user registers', %Q{
 
     expect(page).to have_content('Welcome! You have signed up successfully.')
     expect(page).to have_content('Sign Out')
+    expect(User.first.student).to eq(nil)
   end
 
   scenario 'provide invalid registration information' do
@@ -31,5 +32,22 @@ feature 'user registers', %Q{
     click_button 'Sign up'
     expect(page).to have_content("can't be blank")
     expect(page).to_not have_content('Sign Out')
+  end
+
+  scenario 'user signs up after having already registered for classes' do
+    student = FactoryGirl.create(:student)
+    visit new_user_registration_path
+
+    fill_in 'Email', with: student.email
+    fill_in 'Password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
+
+    click_button 'Sign up'
+
+    expect(page).to have_content('Welcome! You have signed up successfully.')
+    expect(page).to have_content('Sign Out')
+    student.reload
+    expect(student.user).to be_a(User)
+    expect(User.first.student).to eq(student)
   end
 end

@@ -1,17 +1,21 @@
 class StudentsController < ApplicationController
+
   def new
-    binding.pry
     @student = Student.new
   end
+
   def index
+    @students = Student.all
   end
 
   def create
     if Student.where(student_params).exists?
-      @student = Student.where(student_params)
-      redirect_to new_student_registration_holder_path(@student.first.id)
+      @student = Student.where(student_params).first
+      @student.assign_user(current_user) if current_user
+      redirect_to new_student_registration_holder_path(@student.id)
     else
       @student = Student.new(student_params)
+      @student.assign_user(current_user) if current_user
       if @student.save
         flash[:notice] = "Student instantiated."
         redirect_to new_student_registration_holder_path(@student.id)
@@ -20,6 +24,17 @@ class StudentsController < ApplicationController
         render :new
       end
     end
+  end
+
+  def show
+    @student = Student.find(params[:id])
+  end
+
+  def destroy
+    @student = Student.find(params[:id])
+    @student.destroy
+    flash[:message] = "Student obliterated."
+    redirect_to students_path
   end
 
   protected

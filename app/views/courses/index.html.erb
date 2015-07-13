@@ -1,90 +1,32 @@
 <h1>Classes list!</h1>
 
-<%= @current_monday_courses.first.meeting_dates.first.first.strftime('%A') %>
-<% @current_monday_courses.each do |course| %>
-  <li><%= link_to course.title, course_path(course) %></li>
-  <li><%= course.description %></li>
-  <%= course.venue.building_name %>
-  <%= course.time %>
-  <% course.instructors.each do |instructor| %>
-    <%= instructor.full_name %>,
+<% @upcoming_courses.each do |month| %>
+  <% month.each do |weekday| %>
+    <% weekday.courses.each do |course| %>
+      <li><%= link_to course.title, course_path(course) %></li>
+      <li><%= course.description %></li>
+      <%= course.venue.building_name %>
+      <%= course.time %>
+      <% course.instructors.each do |instructor| %>
+        <%= instructor.full_name %>,
+        <%end%>
+        <b>more info</b>
+      <br>
+      <%= course.meeting_dates.first.first.strftime('%B %e') %>,
+      <%= course.meeting_dates.first.second.strftime('%B %e') if course.meeting_dates.first.second %>,
+      <%= course.meeting_dates.first.third.strftime('%B %e') if course.meeting_dates.first.third %>,
+      <%= course.meeting_dates.first.fourth.strftime('%B %e') if course.meeting_dates.first.fourth %>
+
+      Leads: <%= (course.course_registrations.map { |student| student.role }).count("Lead") %>
+      Follows: <%= (course.course_registrations.map { |student| student.role }).count("Follow") %>
+      <br><br>
     <%end%>
-    <b>more info</b>
-<br>
-<%= course.meeting_dates.first.first.strftime('%B %e') %>,
-<%= course.meeting_dates.first.second.strftime('%B %e') if course.meeting_dates.first.second %>,
-<%= course.meeting_dates.first.third.strftime('%B %e') if course.meeting_dates.first.third %>,
-<%= course.meeting_dates.first.fourth.strftime('%B %e') if course.meeting_dates.first.fourth %>
+  <% end %>
 
-Leads: <%= (course.registrations.map { |student| student.role }).count("Lead") %>
-Follows: <%= (course.registrations.map { |student| student.role }).count("Follow") %>
-<br><br>
-<%end%>
-<%= @current_tuesday_courses.first.meeting_dates.first.first.strftime('%A') %>
-<% @current_tuesday_courses.each do |course| %>
-
-  <li><%= link_to course.title, course_path(course) %></li>
-  <li><%= course.description %></li>
-  <%= course.venue.building_name %>
-  <%= course.time %>
-  <% course.instructors.each do |instructor| %>
-    <%= instructor.full_name %>,
-    <%end%>
-    <b>more info</b>
-<br>
-<%= course.meeting_dates.first.first.strftime('%B %e') %>,
-<%= course.meeting_dates.first.second.strftime('%B %e') if course.meeting_dates.first.second %>,
-<%= course.meeting_dates.first.third.strftime('%B %e') if course.meeting_dates.first.third %>,
-<%= course.meeting_dates.first.fourth.strftime('%B %e') if course.meeting_dates.first.fourth %>
-
-Leads: <%= (course.registrations.map { |student| student.role }).count("Lead") %>
-Follows: <%= (course.registrations.map { |student| student.role }).count("Follow") %>
-<br><br>
-<%end%>
-<%= button_to "Register for #{@current_tuesday_courses.first.meeting_dates.first.second.strftime('%B')} classes", new_student_path, :method => :get %>
-<br><br>
-<%= @upcoming_monday_courses.first.meeting_dates.first.first.strftime('%A') %>
-<% @upcoming_monday_courses.each do |course| %>
-
-
-  <li><%= link_to course.title, course_path(course) %></li>
-  <li><%= course.description %></li>
-  <%= course.venue.building_name %>
-  <%= course.time %>
-  <% course.instructors.each do |instructor| %>
-    <%= instructor.full_name %>,
-    <%end%>
-    <b>more info</b>
-<br>
-<%= course.meeting_dates.first.first.strftime('%B %e') %>,
-<%= course.meeting_dates.first.second.strftime('%B %e') if course.meeting_dates.first.second %>,
-<%= course.meeting_dates.first.third.strftime('%B %e') if course.meeting_dates.first.third %>,
-<%= course.meeting_dates.first.fourth.strftime('%B %e') if course.meeting_dates.first.fourth %>
-
-Leads: <%= (course.registrations.map { |student| student.role }).count("Lead") %>
-Follows: <%= (course.registrations.map { |student| student.role }).count("Follow") %>
-<br><br>
-<%end%>
-
-<%= @upcoming_tuesday_courses.first.meeting_dates.first.first.strftime('%A') %>
-<% @upcoming_tuesday_courses.each do |course| %>
-
-    <li><%= link_to course.title, course_path(course) %></li>
-    <li><%= course.description %></li>
-    <%= course.venue.building_name %>
-    <%= course.time %>
-    <% course.instructors.each do |instructor| %>
-      <%= instructor.full_name %>,
-      <%end%>
-      <b>more info</b>
-  <br>
-  <%= course.meeting_dates.first.first.strftime('%B %e') %>,
-  <%= course.meeting_dates.first.second.strftime('%B %e') if course.meeting_dates.first.second %>,
-  <%= course.meeting_dates.first.third.strftime('%B %e') if course.meeting_dates.first.third %>,
-  <%= course.meeting_dates.first.fourth.strftime('%B %e') if course.meeting_dates.first.fourth %>
-
-  Leads: <%= (course.registrations.map { |student| student.role }).count("Lead") %>
-  Follows: <%= (course.registrations.map { |student| student.role }).count("Follow") %>
-  <br><br>
+  <% if current_user && current_user.student %>
+    <%= button_to "Register for #{month.first.second.strftime('%B')} Classes", new_student_registration_holder_path(current_user.student.id), method: :get %>
+  <%else%>
+    <%= button_to "Register for #{month.first.second.strftime('%B')} Classes", new_student_path, method: :get %>
   <%end%>
-  <%= button_to "Register for #{@upcoming_tuesday_courses.first.meeting_dates.first.second.strftime('%B')} classes", new_student_path, :method => :get %>
+  <br><br>
+<% end %>

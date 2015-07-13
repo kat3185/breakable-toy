@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20150703014940) do
     t.datetime "updated_at"
   end
 
+  create_table "course_registrations", force: :cascade do |t|
+    t.integer  "course_id",                   null: false
+    t.integer  "student_id",                  null: false
+    t.string   "role",       default: "None", null: false
+    t.boolean  "paid",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string   "title",       null: false
     t.text     "description", null: false
@@ -45,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150703014940) do
     t.string   "email",      null: false
     t.string   "photo_url"
     t.string   "video_url"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,15 +82,7 @@ ActiveRecord::Schema.define(version: 20150703014940) do
     t.integer  "fifth_course"
     t.integer  "sixth_course"
     t.integer  "student_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "registrations", force: :cascade do |t|
-    t.integer  "course_id",                  null: false
-    t.integer  "student_id",                 null: false
-    t.string   "role",                       null: false
-    t.boolean  "paid",       default: false
+    t.integer  "month"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -89,6 +91,7 @@ ActiveRecord::Schema.define(version: 20150703014940) do
     t.string   "first_name", null: false
     t.string   "last_name",  null: false
     t.string   "email",      null: false
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -96,6 +99,7 @@ ActiveRecord::Schema.define(version: 20150703014940) do
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
+    t.string   "role"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

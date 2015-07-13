@@ -13,7 +13,7 @@ FactoryGirl.define do
   end
 
   factory :course do
-    title "Lindy 1A"
+    sequence(:title) {|n| "Lindy #{n}A" }
     description "Eight count!"
     time "7:30-8:30pm"
 
@@ -27,8 +27,19 @@ FactoryGirl.define do
 
     trait :with_students do
       after(:create) do |course|
-        course.students << FactoryGirl.create(:student)
-        course.students << FactoryGirl.create(:student, full_name: "Emily Kasman")
+        dang = FactoryGirl.create(:student)
+        kspaz = FactoryGirl.create(:student,
+                                   first_name: "Emiline",
+                                   last_name: "Kasmspasm")
+        FactoryGirl.create(:course_registration, student: dang, course: course)
+        FactoryGirl.create(:course_registration, student: kspaz, course: course)
+      end
+    end
+
+    trait :with_meetings do
+      after(:create) do |course|
+        date = FactoryGirl.create(:meeting_date)
+        FactoryGirl.create(:course_meeting, meeting_date: date, course: course)
       end
     end
   end
@@ -46,7 +57,8 @@ FactoryGirl.define do
   end
 
   factory :student do
-    full_name "Dang Mai"
+    first_name "Dang"
+    last_name "Mai"
     email "Dangit@gmail.com"
 
     trait :with_course do
@@ -55,14 +67,45 @@ FactoryGirl.define do
       end
     end
   end
-  #
-  # factory :meeting_date do
-  #   first Date.new(2015, 7, 7)
-  #   second Date.new(2015, 7, 14)
-  #   third Date.new(2015, 7, 21)
-  #   fourth Date.new(2015, 7, 28)
-  #
-  #   course
-  # end
+
+  factory :course_registration do
+    role "Follow"
+
+    course
+    student
+  end
+
+  factory :meeting_date do
+    first Date.new(2015, 7, 6)
+    second Date.new(2015, 7, 13)
+    third Date.new(2015, 7, 20)
+    fourth Date.new(2015, 7, 27)
+  end
+
+  factory :course_meeting do
+    meeting_date
+    course
+  end
+
+  factory :course_instructor do
+    course
+    instructor
+  end
+
+  factory :registration_holder do
+    first_role "Follow"
+    second_role "Follow"
+    third_role "Lead"
+    fourth_role "None"
+    month 7
+
+    student
+    trait :with_courses do
+      after(:create) do |holder|
+        FactoryGirl.create_list(:course, 4, :with_meetings)
+        holder.assign_courses
+      end
+    end
+  end
 
 end
