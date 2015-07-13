@@ -33,3 +33,5 @@ To report how broken the site is
 As a user
 I want to know where else in Boston I can swing dance
 So that I can use what I learn
+
+Badge pull request!
