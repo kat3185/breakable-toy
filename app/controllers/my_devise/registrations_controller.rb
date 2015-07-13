@@ -1,5 +1,4 @@
 class MyDevise::RegistrationsController < Devise::RegistrationsController
-
   def create
     super
     if resource.save
@@ -10,5 +9,4 @@ class MyDevise::RegistrationsController < Devise::RegistrationsController
       end
     end
   end
-
 end
