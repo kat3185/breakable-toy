@@ -9,15 +9,13 @@ class StudentsController < ApplicationController
   end
 
   def create
-    if current_user && current_user.student.nil?
-      @student.user = current_user
-      current_user.student = @student
-    end
     if Student.where(student_params).exists?
-      @student = Student.where(student_params)
-      redirect_to new_student_registration_holder_path(@student.first.id)
+      @student = Student.where(student_params).first
+      @student.assign_user(current_user) if current_user
+      redirect_to new_student_registration_holder_path(@student.id)
     else
       @student = Student.new(student_params)
+      @student.assign_user(current_user) if current_user
       if @student.save
         flash[:notice] = "Student instantiated."
         redirect_to new_student_registration_holder_path(@student.id)

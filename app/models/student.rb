@@ -9,6 +9,13 @@ class Student < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def assign_user(current_user)
+    if current_user.student.nil?
+      self.user = current_user
+      current_user.student = self
+    end
+  end
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true

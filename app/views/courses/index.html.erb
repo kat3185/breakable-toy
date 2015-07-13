@@ -24,9 +24,9 @@
   <% end %>
 
   <% if current_user && current_user.student %>
-    <%= button_to "Register for #{month.first.second.strftime('%B')} classes", new_student_registration_holder_path(current_user.student.id), method: :get %>
+    <%= button_to "Register for #{month.first.second.strftime('%B')} Classes", new_student_registration_holder_path(current_user.student.id), method: :get %>
   <%else%>
-    <%= button_to "Register for #{month.first.second.strftime('%B')} classes", new_student_path, method: :get %>
+    <%= button_to "Register for #{month.first.second.strftime('%B')} Classes", new_student_path, method: :get %>
   <%end%>
   <br><br>
 <% end %>
