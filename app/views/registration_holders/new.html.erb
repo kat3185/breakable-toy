@@ -1,3 +1,4 @@
+<h1><%= @this_month.first.second.strftime('%B') %> Courses</h1>
 <%= form_for [@student, @registration_holder] do |f| %>
 
   <%= f.label(:first_role, "#{@this_month.first.courses.first.title}") %>
@@ -17,6 +18,7 @@
   <%= f.submit "Register for #{@this_month.first.second.strftime('%B')} Classes" %>
 <% end %>
 <br><br>
+<h1><%= @next_month.first.second.strftime('%B') %> Courses</h1>
 <%= form_for [@student, @registration_holder] do |f| %>
 
   <%= f.label(:first_role, "#{@next_month.first.courses.first.title}") %>
