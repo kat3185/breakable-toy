@@ -1,0 +1,29 @@
+<%= form_for course do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+    <%= f.label :time %>
+    <%= f.text_field :time %>
+  </div>
+
+  <div>
+    <%= f.label :venue_id %>
+    <%= f.select :venue_id, Venue.all.map {|a| [a.building_name, a.id] } %>
+  </div>
+
+  <div>
+    <%= label_tag :meeting_date %>
+    <%= select_tag :meeting_date, options_for_select(dates) %>
+  </div>
+
+
+  <%= f.submit 'Submit Course', class:"button round" %>
+<% end %>

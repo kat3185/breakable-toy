@@ -17,6 +17,7 @@ RSpec.describe Student, type: :model do
   it "#assign_user(current_user)" do
     user = FactoryGirl.create(:user)
     student.assign_user(user)
+    
     expect(student.user.email).to eq(user.email)
     expect(user.student.first_name).to eq(student.first_name)
   end

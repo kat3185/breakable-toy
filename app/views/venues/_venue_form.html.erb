@@ -1,0 +1,13 @@
+<%= form_for venue do |f| %>
+  <div>
+    <%= f.label :building_name %>
+    <%= f.text_field :building_name %>
+  </div>
+
+  <div>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </div>
+
+  <%= f.submit 'Submit Venue', class:"button round" %>
+<% end %>

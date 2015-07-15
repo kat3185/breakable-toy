@@ -17,6 +17,7 @@ RSpec.describe User, type: :model do
     student = FactoryGirl.create(:student)
     user.student = student
     student.user = user
+    
     expect(user.student).to be_a(Student)
     expect(student.user).to be_a(User)
   end
@@ -25,6 +26,7 @@ RSpec.describe User, type: :model do
     instructor = FactoryGirl.create(:instructor)
     user.instructor = instructor
     instructor.user = user
+
     expect(user.instructor).to be_an(Instructor)
     expect(instructor.user).to be_a(User)
   end

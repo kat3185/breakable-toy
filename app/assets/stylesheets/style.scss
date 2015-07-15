@@ -1,0 +1,81 @@
+$dark-creme: #B69F9F;
+$medium-creme: #DDCDCD;
+$light-creme: #FFEDED;
+$creme-white: #FFF8F8;
+$medium-yellow: #DEDED0;
+$lighter-yellow: #FFFFF9;
+$mid-red: #770000;
+$dark-red: #510000;
+$light-red: #990808;
+$lighter-red: #B92020;
+
+$side-nav-background: $medium-yellow;
+
+body {
+  margin-top: 1em;
+}
+
+.course-title {
+  font-size: 125%;
+  font-weight: bold;
+}
+
+.course-info {
+  font-size: 80%;
+}
+
+.instructor-title {
+  font-size: 125%;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.instructor-title span {
+  font-size: 70%;
+  font-weight: normal;
+  float: right;
+  padding-top: 8px;
+}
+
+.venue-title {
+  font-size: 125%;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.venue-title span {
+  font-size: 70%;
+  font-weight: normal;
+}
+
+.center-table {
+  text-align: center;
+}
+
+.month-courses {
+  background-color: $lighter-yellow;
+}
+
+.side-nav {
+  background-color: $side-nav-background;
+  text-align: center;
+}
+
+.side-nav-back {
+  top: 0;
+  left: 5%;
+  bottom: 0;
+  width: 15em;
+  background: $side-nav-background; // the color you want the sidebar to be
+  position: absolute;
+}
+
+.bottom-avatar-text {
+  bottom: 20px;
+  font-size: 1em !important;
+  height: 52px;
+  left: 50px;
+  padding-top: 7px;
+  position: fixed;
+  width: 60px;
+}

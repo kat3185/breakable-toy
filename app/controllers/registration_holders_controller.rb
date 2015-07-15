@@ -15,7 +15,7 @@ class RegistrationHoldersController < ApplicationController
       registration.process
     end
     flash[:notice] = "Registration Created!"
-    redirect_to courses_path
+    redirect_to student_path(params[:student_id])
   end
 
   protected
