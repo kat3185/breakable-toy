@@ -15,7 +15,7 @@
 
   <%= f.hidden_field(:month, value: @this_month.first.third.month.to_s) %>
 
-  <%= f.submit "Register for #{@this_month.first.second.strftime('%B')} Classes" %>
+  <%= f.submit "Register for #{@this_month.first.second.strftime('%B')} Classes", class: "button round" %>
 <% end %>
 <br><br>
 <h1><%= @next_month.first.second.strftime('%B') %> Courses</h1>
@@ -35,5 +35,5 @@
 
   <%= f.hidden_field(:month, value: @next_month.first.third.month.to_s) %>
 
-  <%= f.submit "Register for #{@next_month.first.second.strftime('%B')} Classes" %>
+  <%= f.submit "Register for #{@next_month.first.second.strftime('%B')} Classes", class: "button round" %>
 <% end %>

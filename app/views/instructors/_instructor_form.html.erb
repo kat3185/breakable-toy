@@ -1,0 +1,18 @@
+<%= form_for instructor do |f| %>
+  <div>
+    <%= f.label :full_name %>
+    <%= f.text_field :full_name %>
+  </div>
+
+  <div>
+    <%= f.label :bio %>
+    <%= f.text_area :bio %>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <%= f.submit "Submit Instructor", class:"button round" %>
+<% end %>

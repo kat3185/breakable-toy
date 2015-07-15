@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 Venue.create(building_name: "The Whistle Stop", address: "24 Roland St, Charleston MA")
 puts "Created venue."
 
@@ -27,6 +20,7 @@ puts "Created classes."
 Instructor.create(full_name: "Cari Meisel", bio: "Very very very short.", email: "Cmeis@nss.com")
 Instructor.create(full_name: "Andrew Selzer", bio: "Very very very opinionated.", email: "Asel@nss.com")
 Instructor.create(full_name: "Katie Piscelli", bio: "Very very very friendly.", email: "Krp@nss.com")
+Instructor.create(full_name: "Ken Thomas", bio: "Very very very calm.", email: "KThom@nss.com")
 puts "Created instructors."
 
 Student.create(first_name: "Dang", last_name: 'Mai', email: "Dangit@gmail.com")
@@ -47,10 +41,10 @@ CourseRegistration.create(course_id: 4, student_id: 4, role: "Follow", paid: tru
 CourseRegistration.create(course_id: 4, student_id: 1, role: "Lead", paid: true)
 puts "Created registrations."
 
-CourseInstructor.create(course_id:1, instructor_id: 1)
-CourseInstructor.create(course_id:1, instructor_id: 2)
-CourseInstructor.create(course_id:2, instructor_id: 3)
-CourseInstructor.create(course_id:2, instructor_id: 2)
+Course.all.each do |course|
+  CourseInstructor.create(course: course, instructor_id: 1)
+  CourseInstructor.create(course: course, instructor_id: 2)
+end
 puts "Created course instructors."
 
 d1 = Date.new(2015, 7, 7)

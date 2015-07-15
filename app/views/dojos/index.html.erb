@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New School Swing: Boston Lindy Hop and Swing Dance Instruction</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+  <link type="text/css" media="screen" rel="stylesheet" href="responsive-tables.css" />
+  <script type="text/javascript" src="responsive-tables.js"></script>
+</head>
+<body>
+
+
+
+<div class="row">
+  <div class="medium-3 columns side-nav">
+    <%- flash.each do |key, value| -%>
+      <div class="flash flash-<%= key %>">
+        <%= value %>
+      </div>
+    <%- end -%>
+    <h1> Logo </h1>
+
+    <ul class="side-nav">
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Classes', courses_path %></li>
+      <li><%= link_to 'Dojo', dojo_path %></li>
+      <li><%= link_to 'Instructors', instructors_path %></li>
+      <li><%= link_to 'Directions', venues_path %></li>
+      <li><%= link_to 'Add Course', new_course_path %></li>
+      <li><%= link_to 'Students', students_path %></li>
+      <%- if current_user -%>
+        <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
+        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+      <%- else -%>
+        <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        <li><%= link_to 'Sign In', new_user_session_path %></li>
+      <%- end -%>
+    </ul><hr>
+    <h3>Class Pricing</h3>
+    Single Series
+    <table class="side-nav center-table">
+      <tr><th></th><th>Online</th><th>At the door</th></tr>
+      <tr><td>Student</td><td>$40</td><td>$50</td></tr>
+      <tr><td>General</td><td>$50</td><td>$60</td></tr>
+    </table>
+    Multiple Series
+    <table class="side-nav center-table">
+      <tr><th></th><th>Online</th><th>At the door</th></tr>
+      <tr><td>Student</td><td>$70</td><td>$90</td></tr>
+      <tr><td>General</td><td>$90</td><td>$110</td></tr>
+    </table>
+</div>
+<div class="medium-7 columns">
+<div>
+<h3>What is Dojo?</h3>
+
+<p>Dojo is a Lindy Hop guided practice session. We invite anyone who already knows the basics to come and work with the beginners and advanced beginners. Additionally, the teachers of the beginner class stay to work with students, and many other NSS teachers often come help out, too. Learning from classes is good, but receiving one-on-one help is amazing for solidifying connection technique and practicing everything learned in class.</p>
+
+<p>The idea behind Dojo is to greatly accelerate the rate at which our students learn and retain material by giving them a structured place to practice with expert help. Ever heard of the zone of proximal development? Dojo is not designed to replace private lessons, but it is sort of like getting a micro-private lesson in the middle of an open practice session.</p>
+
+<p>Even if you are not taking one of our classes, you are still welcome to come to Dojo and work on your dancing with others.</p>
+<div>
+<h3>What happens at Dojo?</h3>
+<p>From 9:00-9:45pm, NSS instructors, intermediate, and advanced students will help beginner and advanced beginner level students through direct, one-on-one feedback. You can identify instructors because they will be wearing a yellow "NSS Instructor" button. Volunteer advanced dancers will be wearing a white "NSS" button. Intermediate and Advanced students are welcome to also ask for feedback from instructors during this time. Try to mix up how much you help vs. how much you ask for help.</p>
+
+<p>To get the most out of your experience at Dojo, be proactive! Find someone wearing a button and ask them for feedback or help with something you're practicing. Dance with different partners -- this is one of the best ways to improve. And when you've gotten enough feedback that your brain feels full, allow yourself to stop taking more input and just practice.</p>
+
+<p>At 9:45pm, NSS instructors will organize a "transition" activity to mark the change from one-on-one help to open practice time for everyone. The transition activity might be a line dance like the Shim Sham, a practice competition, or some other fun exercise to help you improve!</p>
+
+<p>From 9:45-10:30pm, there will be open practice and dancing, but instructors, intermediate, and advanced dancers will put their buttons away. Even advanced dancers and instructors need time to practice and help one another, so they will be less available to help beginners after 9:45pm. We definitely encourage beginner and advanced beginner dancers to stay all the way to 10:30pm, to keep practicing together!</p>
+
+<h3>Are classes and Dojo enough?</h3>
+<p>If you have as much fun dancing as we do and want to get really good so as to enjoy it even more, you should definitely start social dancing in addition to taking classes and attending Dojo.</p>
+
+<p>See our links page for more details on where to dance. Invite some of your NSS classmates to join you so you know people at the dance. Or come on one of our monthly group outings to a local Boston social dance! These outings are generally announced in classes and in our newsletter.</p>
+
+<p>Other ways to improve include taking private lessons and attending workshop weekends, camps, and competition weekends. All NSS instructors are available for private lessons. If you're interested to know more about private lessons, just ask your favorite instructor!</p>
+</div>
+</div>
+  <%= javascript_include_tag 'application' %>
+  <%= yield :extra_footer %>
+</body>
+</html>

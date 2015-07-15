@@ -1,0 +1,10 @@
+<div class="small-12 columns">
+<% @venues.each do |venue| %>
+  <div class="venue-title">
+    <%= venue.building_name %><br>
+    <span><%= venue.address %><br> <%= link_to 'Edit Venue', edit_venue_path(venue.id)%></span>
+  </div>
+  <hr>
+<%end%>
+<%= render partial: "venue_form", locals: {venue: @venue} %>
+</div>
