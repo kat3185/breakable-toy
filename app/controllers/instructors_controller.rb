@@ -37,8 +37,9 @@ class InstructorsController < ApplicationController
     flash[:message] = "Instructor Obliterated!"
     redirect_to instructors_path
   end
-  
+
   protected
+  
   def instructor_params
     params.require(:instructor).permit(:full_name, :bio, :email)
   end

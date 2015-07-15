@@ -30,7 +30,9 @@ class VenuesController < ApplicationController
       render :edit
     end
   end
+
   protected
+  
   def venue_params
     params.require(:venue).permit(:building_name, :address)
   end

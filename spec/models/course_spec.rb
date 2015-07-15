@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Course, type: :model do
   it 'had a working factory' do
-
     course = FactoryGirl.create(:course)
+    
     expect(course.title).to be_a(String)
     expect(course.description).to be_a(String)
     expect(course.time).to be_a(String)

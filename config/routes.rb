@@ -14,5 +14,5 @@ Rails.application.routes.draw do
 
   resources :students, only: [:index, :show, :destroy]
 
-  get 'dojo', to: 'dojos#index'
+  get "dojo", to: "dojos#index"
 end
