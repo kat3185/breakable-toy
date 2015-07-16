@@ -23,7 +23,7 @@ end
 Capybara.default_selector = :css
 Capybara.register_driver :poltergeist do |app|
  options = {
-  phantomjs_logger: WarningSuppressor.new,
+  phantomjs_logger: WarningSuppressor,
   window_size: [1920, 1080],
   phantomjs_options: ['--ssl-protocol=tlsv1']
  }
