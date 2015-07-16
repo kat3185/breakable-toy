@@ -33,9 +33,9 @@ class Student < ActiveRecord::Base
     else
       paid_classes = payment_status.count(true)
       if paid_classes > 1
-        registrations.each do |registration|
-          registration.paid = true
-        end
+        # registrations.each do |registration|
+        #   registration.paid = true
+        # end
         return false
       elsif paid_classes == 1
         return 4000

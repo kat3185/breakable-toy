@@ -26,8 +26,16 @@ class StudentsController < ApplicationController
     end
   end
 
+  def edit
+    binding.pry
+  end
+
   def show
     @student = Student.find(params[:id])
+  end
+
+  def update
+    binding.pry
   end
 
   def destroy

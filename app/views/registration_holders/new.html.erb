@@ -1,3 +1,4 @@
+<div class="#new_registration_holder">
 <h1><%= @this_month.first.second.strftime('%B') %> Courses</h1>
 <%= form_for [@student, @registration_holder] do |f| %>
 
@@ -15,8 +16,25 @@
 
   <%= f.hidden_field(:month, value: @this_month.first.third.month.to_s) %>
 
-  <%= f.submit "Register for #{@this_month.first.second.strftime('%B')} Classes", class: "button round" %>
+
+    <div class="field">
+      <%= label_tag :card_number, "Credit Card Number" %>
+      <%= text_field_tag :card_number, nil, name: nil, data: {stripe: "number"}  %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_code, "Security Code on Card (CVC)" %>
+      <%= text_field_tag :card_code, nil, name: nil, data: {stripe: "cvc"} %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_month, "Card Expiration" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", data: {stripe: "exp-month"}} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", data: {stripe: "exp-year"}} %>
+    </div>
+
+
+  <%= f.submit "Register for #{@this_month.first.second.strftime('%B')} Classes", class: "button round", id: "current_month_submit" %>
 <% end %>
+</div>
 <br><br>
 <h1><%= @next_month.first.second.strftime('%B') %> Courses</h1>
 <%= form_for [@student, @registration_holder] do |f| %>
