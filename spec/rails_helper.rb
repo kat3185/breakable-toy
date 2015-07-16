@@ -12,13 +12,25 @@ require 'capybara/rspec'
 require "capybara/poltergeist"
 require "database_cleaner"
 
+class WarningSuppressor
+  class << self
+    def write(message)
+      if message =~ /QFont::setPixelSize: Pixel size <= 0/ || message =~/CoreText performance note:/ then 0 else puts(message);1;end
+    end
+  end
+end
+
 Capybara.default_selector = :css
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app,
-                                    window_size: [1920, 1080],
-                                    phantomjs_logger: nil)
+ options = {
+  phantomjs_logger: WarningSuppressor.new,
+  window_size: [1920, 1080],
+  phantomjs_options: ['--ssl-protocol=tlsv1']
+ }
+ Capybara::Poltergeist::Driver.new(app, options)
 end
 Capybara.javascript_driver = :poltergeist
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
