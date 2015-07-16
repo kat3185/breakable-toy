@@ -13,4 +13,3 @@
 /tmp
 /coverage
 .env
-config/initializers/stripe.rb
