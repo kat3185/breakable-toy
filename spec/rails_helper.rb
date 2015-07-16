@@ -8,11 +8,14 @@ require 'rspec/rails'
 require 'shoulda-matchers'
 require File.join(File.dirname(__FILE__), 'support/valid_attribute')
 require File.join(File.dirname(__FILE__), 'support/factory_girl')
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 require 'capybara/rspec'
 require 'capybara/rails'
 require "database_cleaner"
 
 Capybara.default_selector = :css
+Capybara.javascript_driver = :selenium
+
 
 ActiveRecord::Migration.maintain_test_schema!
 
