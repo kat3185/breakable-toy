@@ -9,7 +9,7 @@ class RegistrationHoldersController < ApplicationController
   def create
     @registrations = RegistrationHolder.new(holder_params)
     @registrations.student_id = params[:student_id]
-    if @registrations.amount_owed.to_i < 0 #changed from > for deploy with stripe disabled
+    if @registrations.amount_owed.to_i == true #changed from > for deploy with stripe disabled
       Stripe.api_key = STRIPE_TEST_SECRET_KEY
 
       token = params[:stripeToken]
@@ -23,7 +23,7 @@ class RegistrationHoldersController < ApplicationController
       rescue Stripe::CardError => e
       end
     end
-    if charge && charge.paid || true #just for deploy
+    if true || charge && charge.paid #just for deploy
       @registrations = @registrations.create_each_registration
       @registrations.each(&:process)
       flash[:notice] = "Registration Created!"
