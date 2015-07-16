@@ -39,7 +39,6 @@ class CoursesController < ApplicationController
     @date = MeetingDate.find(params[:meeting_date])
     if @course.meeting_dates.first != @date
       old_meeting = CourseMeeting.find_by(course: @course, meeting_date: @course.meeting_dates.first)
-      binding.pry
       old_meeting.delete
       new_meeting = CourseMeeting.new(course: @course, meeting_date: @date)
       new_meeting.save

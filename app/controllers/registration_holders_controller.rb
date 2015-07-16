@@ -4,18 +4,34 @@ class RegistrationHoldersController < ApplicationController
     @student = Student.find(params[:student_id])
     @this_month = MeetingDate.where('extract(month from first) = ?', Date.today.month)
     @next_month = MeetingDate.where('extract(month from first) = ?', Date.today.month.next)
-
   end
 
   def create
     @registrations = RegistrationHolder.new(holder_params)
     @registrations.student_id = params[:student_id]
-    @registrations = @registrations.create_each_registration
-    @registrations.each do |registration|
-      registration.process
+    if @registrations.amount_owed.to_i > 0
+      Stripe.api_key = STRIPE_TEST_SECRET_KEY
+
+      token = params[:stripeToken]
+      begin
+        charge = Stripe::Charge.create(
+          amount: @registrations.amount_owed, # amount in cents, again
+          currency: "usd",
+          source: token,
+          description: "Example charge"
+        )
+      rescue Stripe::CardError => e
+      end
     end
-    flash[:notice] = "Registration Created!"
-    redirect_to student_path(params[:student_id])
+    if charge && charge.paid
+      @registrations = @registrations.create_each_registration
+      @registrations.each(&:process)
+      flash[:notice] = "Registration Created!"
+      redirect_to student_path(params[:student_id])
+    else
+      flash[:notice] = e
+      render :new
+    end
   end
 
   protected

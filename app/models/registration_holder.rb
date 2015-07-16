@@ -13,25 +13,44 @@ class RegistrationHolder < ActiveRecord::Base
     self.sixth_course = courses[5] if courses[5]
   end
 
+  def amount_owed
+    course_count = 0
+    course_count += 1 if first_role != "None"
+    course_count += 1 if second_role != "None"
+    course_count += 1 if third_role != "None"
+    course_count += 1 if fourth_role != "None"
+    if course_count > 1
+      return 9000
+    elsif course_count == 1
+      return 5000
+    else
+      return "Error!"
+    end
+  end
+
   def create_each_registration
     assign_courses
     registrations = []
     registrations << CourseRegistration.new(student_id: self.student_id,
-                                     course_id: self.first_course,
-                                     role: self.first_role)
+                                            course_id: first_course,
+                                            role: first_role,
+                                            paid: true)
 
     registrations << CourseRegistration.new(student_id: self.student_id,
-                                      course_id: self.second_course,
-                                      role: self.second_role)
+                                            course_id: second_course,
+                                            role: second_role,
+                                            paid: true)
 
     registrations << CourseRegistration.new(student_id: self.student_id,
-                                      course_id: self.third_course,
-                                      role: self.third_role)
+                                            course_id: third_course,
+                                            role: third_role,
+                                            paid: true)
 
     registrations << CourseRegistration.new(student_id: self.student_id,
-                                     course_id: self.fourth_course,
-                                     role: self.fourth_role)
+                                            course_id: fourth_course,
+                                            role: fourth_role,
+                                            paid: true)
 
-                                     registrations
+    registrations
   end
 end

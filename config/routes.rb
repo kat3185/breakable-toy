@@ -12,7 +12,11 @@ Rails.application.routes.draw do
     resources :registration_holders, only: [:new, :index, :create]
   end
 
-  resources :students, only: [:index, :show, :destroy]
+  resources :students, only: [:show] do
+    resources :course_registrations, only: [:create]
+  end
+
+  resources :students, only: [:index, :update, :edit, :destroy]
 
   get "dojo", to: "dojos#index"
 end

@@ -4,21 +4,19 @@
   <title>New School Swing: Boston Lindy Hop and Swing Dance Instruction</title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
-  <link type="text/css" media="screen" rel="stylesheet" href="responsive-tables.css" />
-  <script type="text/javascript" src="responsive-tables.js"></script>
+
 </head>
 <body>
 
-
-
 <div class="row">
+
   <div class="medium-3 columns side-nav">
     <%- flash.each do |key, value| -%>
       <div class="flash flash-<%= key %>">
         <%= value %>
       </div>
     <%- end -%>
-    <h1> Logo </h1>
+    <a href=<%= root_path %> id="logo"><%= image_tag "nsslogo.png", size: '300', alt: "New School Swing" %></a>
 
     <ul class="side-nav">
       <li><%= link_to 'Home', root_path %></li>
@@ -49,12 +47,14 @@
       <tr><td>Student</td><td>$70</td><td>$90</td></tr>
       <tr><td>General</td><td>$90</td><td>$110</td></tr>
     </table>
+  </div>
+  <div class="medium-9 end columns">
+    <%= yield %>
+  </div>
+
 </div>
-<div class="medium-7 columns">
-  <%= yield %>
-</div>
-</div>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
+  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= yield :extra_footer %>
 </body>
 </html>
