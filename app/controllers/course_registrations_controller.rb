@@ -1,9 +1,5 @@
 class CourseRegistrationsController < ApplicationController
 
-  def update
-    binding.pry
-  end
-
   def destroy
     @registration = CourseRegistration.find(params[:id])
     @registration.destroy

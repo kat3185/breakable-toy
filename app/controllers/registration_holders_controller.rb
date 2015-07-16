@@ -15,10 +15,10 @@ class RegistrationHoldersController < ApplicationController
       token = params[:stripeToken]
       begin
         charge = Stripe::Charge.create(
-          :amount => @registrations.amount_owed, # amount in cents, again
-          :currency => "usd",
-          :source => token,
-          :description => "Example charge"
+          amount: @registrations.amount_owed, # amount in cents, again
+          currency: "usd",
+          source: token,
+          description: "Example charge"
         )
       rescue Stripe::CardError => e
       end

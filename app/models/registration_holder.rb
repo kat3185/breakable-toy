@@ -32,23 +32,23 @@ class RegistrationHolder < ActiveRecord::Base
     assign_courses
     registrations = []
     registrations << CourseRegistration.new(student_id: self.student_id,
-                                            course_id: self.first_course,
-                                            role: self.first_role,
+                                            course_id: first_course,
+                                            role: first_role,
                                             paid: true)
 
     registrations << CourseRegistration.new(student_id: self.student_id,
-                                            course_id: self.second_course,
-                                            role: self.second_role,
+                                            course_id: second_course,
+                                            role: second_role,
                                             paid: true)
 
     registrations << CourseRegistration.new(student_id: self.student_id,
-                                            course_id: self.third_course,
-                                            role: self.third_role,
+                                            course_id: third_course,
+                                            role: third_role,
                                             paid: true)
 
     registrations << CourseRegistration.new(student_id: self.student_id,
-                                            course_id: self.fourth_course,
-                                            role: self.fourth_role,
+                                            course_id: fourth_course,
+                                            role: fourth_role,
                                             paid: true)
 
     registrations
