@@ -11,6 +11,7 @@ require File.join(File.dirname(__FILE__), 'support/factory_girl')
 require 'capybara/rspec'
 require 'capybara/rails'
 require "database_cleaner"
+require 'selenium-webdriver'
 
 Capybara.default_selector = :css
 
