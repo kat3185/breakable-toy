@@ -54,8 +54,8 @@ gem 'valid_attribute', group: [:development, :test]
 gem 'dotenv-rails', group: [:development, :test]
 gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
+gem 'selenium-webdriver'
 gem 'foundation-rails'
 gem 'pry-rails', group: [:development, :test]
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
-gem "poltergeist", group: [:development, :test]
 gem 'database_cleaner', group: [:development, :test]
