@@ -54,7 +54,7 @@ gem 'valid_attribute', group: [:development, :test]
 gem 'dotenv-rails', group: [:development, :test]
 gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
-gem 'selenium-webdriver'
+gem 'selenium-webdriver', group: [:test]
 gem 'foundation-rails'
 gem 'pry-rails', group: [:development, :test]
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
