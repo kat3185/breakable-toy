@@ -10,8 +10,7 @@ class RegistrationHoldersController < ApplicationController
     @registrations = RegistrationHolder.new(holder_params)
     @registrations.student_id = params[:student_id]
     if @registrations.amount_owed.to_i > 0
-      binding.pry
-      Stripe.api_key = ::STRIPE_TEST_SECRET_KEY
+      Stripe.api_key = STRIPE_TEST_SECRET_KEY
 
       token = params[:stripeToken]
       begin
