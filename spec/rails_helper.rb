@@ -15,8 +15,7 @@ require "database_cleaner"
 require 'capybara/poltergeist'
 
 Capybara.default_selector = :css
-Capybara.javascript_driver = :selenium
-
+Capybara.javascript_driver = :poltergeist
 
 ActiveRecord::Migration.maintain_test_schema!
 
