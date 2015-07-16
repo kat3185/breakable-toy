@@ -6,8 +6,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'shoulda-matchers'
-require File.join(File.dirname(__FILE__), 'support/valid_attribute')
-require File.join(File.dirname(__FILE__), 'support/factory_girl')
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 require 'capybara/rspec'
 require 'capybara/rails'

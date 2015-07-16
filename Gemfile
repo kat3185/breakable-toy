@@ -51,12 +51,12 @@ gem 'capybara', group: [:development, :test]
 gem 'launchy', group: [:development, :test]
 gem 'factory_girl', group: [:development, :test]
 gem 'valid_attribute', group: [:development, :test]
-gem 'dotenv-rails', group: [:development, :test]
+gem 'dotenv-rails'
 gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
 gem 'selenium-webdriver', group: [:test]
 gem 'foundation-rails'
-gem 'poltergeist', group: [:test]
+gem 'poltergeist', group: [:development, :test]
 gem 'pry-rails', group: [:development, :test]
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'database_cleaner', group: [:development, :test]
