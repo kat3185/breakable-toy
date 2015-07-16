@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RegistrationHolder, type: :model do
   let(:holda) { FactoryGirl.create(:registration_holder) }
+  let(:complete_holder) { FactoryGirl.create(:registration_holder, :with_courses) }
 
   it "has a working factory" do
     expect(holda).to be_a(RegistrationHolder)
@@ -32,12 +33,15 @@ RSpec.describe RegistrationHolder, type: :model do
   end
 
   it "can factory up a complete registration holder" do
-    complete_holder = FactoryGirl.create(:registration_holder, :with_courses)
     expect(complete_holder.first_course).to be_an(Integer)
     registrations = complete_holder.create_each_registration
 
     expect(registrations.fourth.role).to eq("None")
     expect(registrations).to be_an(Array)
     expect(registrations.first).to be_a(CourseRegistration)
+  end
+
+  it "#amount_owed" do
+    expect(complete_holder.amount_owed).to eq(9000)
   end
 end
