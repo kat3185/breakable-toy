@@ -56,6 +56,7 @@ gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
 gem 'selenium-webdriver', group: [:test]
 gem 'foundation-rails'
+gem 'poltergeist', group: [:test]
 gem 'pry-rails', group: [:development, :test]
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'database_cleaner', group: [:development, :test]

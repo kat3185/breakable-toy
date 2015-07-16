@@ -12,6 +12,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 require 'capybara/rspec'
 require 'capybara/rails'
 require "database_cleaner"
+require 'capybara/poltergeist'
 
 Capybara.default_selector = :css
 Capybara.javascript_driver = :selenium
