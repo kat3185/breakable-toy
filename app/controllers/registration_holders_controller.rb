@@ -25,9 +25,7 @@ class RegistrationHoldersController < ApplicationController
     end
     if charge && charge.paid
       @registrations = @registrations.create_each_registration
-      @registrations.each do |registration|
-        registration.process
-      end
+      @registrations.each(&:process)
       flash[:notice] = "Registration Created!"
       redirect_to student_path(params[:student_id])
     else
