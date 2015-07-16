@@ -11,7 +11,7 @@ feature 'guest registers for classes', %Q{
   [x] Registering for courses creates the appropriate course_registrations objects
 } do
 
-  pending 'guest registers for a class' do
+  scenario 'guest registers for a class', js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -48,14 +48,19 @@ feature 'guest registers for classes', %Q{
     expect(page).to have_button("Register for #{date.second.strftime('%B')} Classes")
     expect(page).to have_button("Register for #{date2.second.strftime('%B')} Classes")
     select "Follow", from: "registration_holder[first_role]", match: :first
+    fill_in "Credit Card Number", with: "4242424242424242", match: :first
+    fill_in "card_code", with: "123", match: :first
+    select "1 - January", from: "card_month", match: :first
+    select "2016", from: "card_year", match: :first
     click_button "Register for #{date.second.strftime('%B')} Classes"
+
     expect(page).to have_content("Registration Created!")
     emiline = Student.find_by(first_name: "Emiline")
     expect(emiline.courses.first).to be_a(Course)
     expect(emiline.course_registrations.first).to be_a(CourseRegistration)
   end
 
-  pending 'guest registers for four classes' do
+  scenario 'guest registers for four classes', js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -95,7 +100,12 @@ feature 'guest registers for classes', %Q{
     select "Lead", from: "registration_holder[second_role]", match: :first
     select "Lead", from: "registration_holder[third_role]", match: :first
     select "Follow", from: "registration_holder[fourth_role]", match: :first
+    fill_in "Credit Card Number", with: "4242424242424242", match: :first
+    fill_in "card_code", with: "123", match: :first
+    select "1 - January", from: "card_month", match: :first
+    select "2016", from: "card_year", match: :first
     click_button "Register for #{date.second.strftime('%B')} Classes"
+
     expect(page).to have_content("Registration Created!")
     robbie = Student.find_by(first_name: "Robbie")
     expect(robbie.courses.first).to be_a(Course)

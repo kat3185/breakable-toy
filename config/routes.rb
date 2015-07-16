@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
   resources :students, only: [:show] do
     resources :course_registrations, only: [:create]
-
   end
 
   resources :students, only: [:index, :update, :edit, :destroy]

@@ -11,7 +11,7 @@ feature 'user registers for classes', %Q{
   [x] Registering for courses creates the appropriate course_registrations objects
 } do
 
-  pending 'user with an associated student registers for a class' do
+  scenario 'user with an associated student registers for a class', js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -58,10 +58,10 @@ feature 'user registers for classes', %Q{
     select "Lead", from: "registration_holder[third_role]", match: :first
     select "Follow", from: "registration_holder[fourth_role]", match: :first
 
-    fill_in "Credit Card Number", with: "4242424242424242"
-    fill_in "card_code", with: "123"
-    select "1 - January", from: "card_month"
-    select "2016", from: "card_year"
+    fill_in "Credit Card Number", with: "4242424242424242", match: :first
+    fill_in "card_code", with: "123", match: :first
+    select "1 - January", from: "card_month", match: :first
+    select "2016", from: "card_year", match: :first
 
     click_button "Register for #{date.second.strftime('%B')} Classes"
     expect(page).to have_content("Registration Created!")
