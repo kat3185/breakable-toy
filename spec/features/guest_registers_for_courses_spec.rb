@@ -43,7 +43,7 @@ feature 'guest registers for classes', %Q{
     fill_in "First name", with: "Emiline"
     fill_in "Last name", with: "Katsman"
     fill_in "Email", with: "EKaz@gmail.com"
-    click_button "Instantiate student"
+    click_button "Submit"
 
     expect(page).to have_button("Register for #{date.second.strftime('%B')} Classes")
     expect(page).to have_button("Register for #{date2.second.strftime('%B')} Classes")
@@ -92,7 +92,7 @@ feature 'guest registers for classes', %Q{
     fill_in "First name", with: "Robbie"
     fill_in "Last name", with: "You"
     fill_in "Email", with: "YouRock@gmail.com"
-    click_button "Instantiate student"
+    click_button "Submit"
 
     expect(page).to have_button("Register for #{date.second.strftime('%B')} Classes")
     expect(page).to have_button("Register for #{date2.second.strftime('%B')} Classes")

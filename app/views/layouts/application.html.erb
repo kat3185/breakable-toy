@@ -26,6 +26,7 @@
       <li><%= link_to 'Directions', venues_path %></li>
       <li><%= link_to 'Add Course', new_course_path %></li>
       <li><%= link_to 'Students', students_path %></li>
+      <li><%= link_to 'New Post', new_post_path %></li>
       <%- if current_user -%>
         <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
         <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>

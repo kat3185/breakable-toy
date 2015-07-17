@@ -13,11 +13,11 @@
       <td><%= link_to student.full_name, student_path(student.id) %></td>
       <td><%= student.email %></td>
       <td><%= student.courses.count %></td>
-      <td>Edit</td>
+      <td><%= link_to "Edit", edit_student_path(student) %></td>
       <td>
-        <%= link_to 'Delete',
+        <%= button_to 'Delete',
           student_path(student.id),
-          method: :delete %>
+          method: :delete, class: "button tiny round" %>
       </td>
     </tr>
   <% end %>

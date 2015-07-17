@@ -30,6 +30,22 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
   end
 
+  def edit
+    @student = Student.find(params[:id])
+  end
+
+  def update
+    @student = Student.find(params[:id])
+    @student.update(student_params)
+    if @student.save
+      flash[:notice] = "Student updated!"
+      redirect_to student_path(@student)
+    else
+      flash[:notice] = @student.errors.full_messages
+      render :edit
+    end
+  end
+
   def destroy
     @student = Student.find(params[:id])
     @student.destroy

@@ -31,8 +31,18 @@ class VenuesController < ApplicationController
     end
   end
 
+  def destroy
+    @venue = Venue.find(params[:id])
+    if @venue.destroy
+      flash[:notice] = "Goodbye Venue!"
+    else
+      flash[:notice] = "I'm sorry Dave, I can't do that."
+    end
+    redirect_to venues_path
+  end
+
   protected
-  
+
   def venue_params
     params.require(:venue).permit(:building_name, :address)
   end
