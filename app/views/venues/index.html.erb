@@ -2,7 +2,9 @@
 <% @venues.each do |venue| %>
   <div class="venue-title">
     <%= venue.building_name %><br>
-    <span><%= venue.address %><br> <%= link_to 'Edit Venue', edit_venue_path(venue.id)%></span>
+    <span><%= venue.address %><br>
+    <%= button_to 'Edit Venue', edit_venue_path(venue.id), class: "button tiny round"%>
+    <%= button_to 'Delete Venue', venue_path(venue.id), class: "button tiny round", method: :delete %></span>
   </div>
   <hr>
 <%end%>

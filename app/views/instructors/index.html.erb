@@ -2,10 +2,10 @@
 <% @instructors.each do |instructor| %>
 PICTURE
 <div class="instructor-title"> <%= instructor.full_name %> <span><%= instructor.email %>
-<%= link_to 'Edit Instructor', edit_instructor_path(instructor)%></span></div>
+<%= button_to 'Edit Instructor', edit_instructor_path(instructor), class: "button tiny round"%>
+<%= button_to 'Delete Instructor', instructor_path(instructor), method: :delete, class: "button tiny round"%></span></div>
 <div class="course-info"><%= instructor.bio %></div>
 VIDEO<br>
-<%= link_to 'Delete Instructor', instructor_path(instructor), method: :delete%>
 <hr>
 <%end%>
 <div class="instructor-title"> Add a new instructor </div>

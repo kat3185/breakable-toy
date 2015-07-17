@@ -16,9 +16,9 @@
       <td><%= course.course_registrations.where(student_id: params[:id]).first.role %></td>
       <td><%= course.course_registrations.where(student_id: params[:id]).first.paid %></td>
       <td>
-        <%= link_to 'Delete',
+        <%= button_to 'Delete',
           course_registration_path(course.course_registrations.where(student_id: params[:id]).first.id),
-          method: :delete %>
+          method: :delete, class: "button tiny round" %>
       </td>
     </tr>
   <% end %>

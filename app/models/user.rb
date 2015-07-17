@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
 
 has_one :student
 has_one :instructor
+has_many :posts
 end

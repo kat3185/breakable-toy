@@ -1,0 +1,32 @@
+<div class="post-title">
+  About New School Swing
+</div>
+<div class="post-body">
+  New School Swing promotes swing dancing in Boston by providing year-round swing dances classes for all levels. We specialize in authentic, vintage swing dance forms like Lindy Hop, Charleston, and Balboa and we offer fun, friendly, inclusive learning environment. Four-week class series begin every month—see our schedule for the latest classes.
+</div>
+<div class="posts-holder">
+  <% @posts.each do |post| %>
+    <div class="post-title">
+      <%= post.title %>
+    </div>
+    <div class="post-body">
+      <%= post.created_at.strftime('%B %e') %>, <%= post.created_at.year %>
+    </div>
+    <div class="post-body">
+      <%= post.body %>
+    </div>
+    <%= button_to "Edit Post", edit_post_path(post), class: "button tiny round" %> <%= button_to "Delete Post", post_path(post), method: :delete, class: "button tiny round" %>
+  <%end%>
+</div>
+<div class="post-title">
+  What is Lindy Dojo?
+</div>
+<div class="post-body">
+  Lindy Dojo is New School Swing's weekly practice session.
+</div>
+<div class="post-body">
+  All students who take classes at New School Swing will be able to attend Lindy Dojo for free! Why are we doing this? Social dancing is both fun and one of the best ways to get better. So are private lessons. Many students can't afford the $25-$100 price of a private lesson, but a guided practice session is like a 5 minute private lesson. We want to encourage beginners and intermediates to stay for the practice session to practice with each other, have a good time dancing, and to work one-on-one with instructors.
+</div>
+<div class="post-body">
+  Visit the <%= link_to "Dojo page", dojo_path %> for more info.
+</div>

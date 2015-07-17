@@ -81,3 +81,24 @@ body {
   position: fixed;
   width: 60px;
 }
+
+.post-title {
+  font-size: 125%;
+  font-weight: bold;
+}
+
+.post-body {
+  font-size: 90%;
+  font-weight: normal;
+  margin: 10px;
+}
+
+.course-buttons
+{
+    width:100%;
+    text-align: right;
+}
+
+.inline {
+  display: inline-block;
+}

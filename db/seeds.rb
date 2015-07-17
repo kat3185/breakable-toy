@@ -99,3 +99,24 @@ CourseMeeting.find_or_create_by(course_id: 12, meeting_date_id: 5)
 CourseMeeting.find_or_create_by(course_id: 5, meeting_date_id: 6)
 CourseMeeting.find_or_create_by(course_id: 6, meeting_date_id: 6)
 puts "Created course meetings."
+
+user1 = User.find_or_create_by(email: "admin@admin.com")
+user1.password = "password"
+user1.password_confirmation = "password"
+user1.role = "admin"
+user1.save!
+
+user2 = User.find_or_create_by(email: "user@user.com")
+user2.password = "password"
+user2.password_confirmation = "password"
+user2.save!
+
+user3 = User.find_or_create_by(email: "user2@user.com")
+user3.password = "password"
+user3.password_confirmation = "password"
+user3.save!
+puts "Created users."
+
+Post.find_or_create_by(title: "July Classes Up!", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", user: user1)
+Post.find_or_create_by(title: "August Classes Up!", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", user: user1)
+puts "Created posts."
