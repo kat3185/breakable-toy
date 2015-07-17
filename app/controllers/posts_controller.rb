@@ -5,7 +5,6 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    binding.pry
     @post.user = current_user
     if @post.save
       flash[:notice] = "Post created!"
