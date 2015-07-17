@@ -12,20 +12,26 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(course_params)
-    @date = MeetingDate.find(params[:meeting_date])
-    if @course.save
-      flash[:notice] = "Your course was created!"
-      CourseMeeting.create(course: @course, meeting_date: @date)
-      redirect_to courses_path
+    if current_user.admin?
+      @course = Course.new(course_params)
+      @date = MeetingDate.find(params[:meeting_date])
+      if @course.save
+        flash[:notice] = "Your course was created!"
+        CourseMeeting.create(course: @course, meeting_date: @date)
+        redirect_to courses_path
+      else
+        flash[:notice] = @course.errors.full_messages
+        render :new
+      end
     else
-      flash[:notice] = @course.errors.full_messages
-      render :new
+      redirect_to "http://www.reddit.com"
     end
   end
 
   def show
     @class = Course.find_by(id: params[:id])
+    @course_review = CourseReview.new
+    @course_reviews = CourseReview.where(course_id: params[:id])
   end
 
   def edit
@@ -34,32 +40,40 @@ class CoursesController < ApplicationController
   end
 
   def update
-    @course = Course.find(params[:id])
-    @course.update(course_params)
-    @date = MeetingDate.find(params[:meeting_date])
-    if @course.meeting_dates.first != @date
-      old_meeting = CourseMeeting.find_by(course: @course, meeting_date: @course.meeting_dates.first)
-      old_meeting.delete
-      new_meeting = CourseMeeting.new(course: @course, meeting_date: @date)
-      new_meeting.save
-    end
-    if @course.save
-      flash[:notice] = "Your course is now more correct!"
-      redirect_to courses_path
+    if current_user && current_user.admin?
+      @course = Course.find(params[:id])
+      @course.update(course_params)
+      @date = MeetingDate.find(params[:meeting_date])
+      if @course.meeting_dates.first != @date
+        old_meeting = CourseMeeting.find_by(course: @course, meeting_date: @course.meeting_dates.first)
+        old_meeting.delete
+        new_meeting = CourseMeeting.new(course: @course, meeting_date: @date)
+        new_meeting.save
+      end
+      if @course.save
+        flash[:notice] = "Your course is now more correct!"
+        redirect_to courses_path
+      else
+        flash[:notice] = @course.errors.full_messages
+        render :edit
+      end
     else
-      flash[:notice] = @course.errors.full_messages
-      render :edit
+      redirect_to "http://www.reddit.com"
     end
   end
 
   def destroy
-    @course = Course.find(params[:id])
-    if @course.destroy
-      flash[:notice] = "That class was wimpy anyway."
+    if current_user && current_user.admin?
+      @course = Course.find(params[:id])
+      if @course.destroy
+        flash[:notice] = "That class was wimpy anyway."
+      else
+        flash[:notice] = "I'm sorry Dave, I can't do that."
+      end
+      redirect_to courses_path
     else
-      flash[:notice] = "I'm sorry Dave, I can't do that."
+      redirect_to "http://www.reddit.com"
     end
-    redirect_to courses_path
   end
 
 

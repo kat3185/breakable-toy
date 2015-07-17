@@ -2,11 +2,16 @@
 <% @venues.each do |venue| %>
   <div class="venue-title">
     <%= venue.building_name %><br>
+
     <span><%= venue.address %><br>
-    <%= button_to 'Edit Venue', edit_venue_path(venue.id), class: "button tiny round"%>
-    <%= button_to 'Delete Venue', venue_path(venue.id), class: "button tiny round", method: :delete %></span>
+    <% if current_user && current_user.admin? %>
+      <%= button_to 'Edit Venue', edit_venue_path(venue.id), class: "button tiny round", method: :get%>
+      <%= button_to 'Delete Venue', venue_path(venue.id), class: "button tiny round", method: :delete %></span>
+    <%end%>
   </div>
   <hr>
 <%end%>
-<%= render partial: "venue_form", locals: {venue: @venue} %>
+<% if current_user && current_user.admin? %>
+  <%= render partial: "venue_form", locals: {venue: @venue} %>
+<%end%>
 </div>

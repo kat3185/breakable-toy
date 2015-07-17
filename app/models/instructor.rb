@@ -5,6 +5,6 @@ class Instructor < ActiveRecord::Base
   accepts_nested_attributes_for :user
 
   validates :full_name, presence: true
-  validates :bio, presence: true
+  validates :body, presence: true
   validates :email, presence: true
 end

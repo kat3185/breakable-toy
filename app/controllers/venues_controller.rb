@@ -5,13 +5,17 @@ class VenuesController < ApplicationController
   end
 
   def create
-    @venue = Venue.new(venue_params)
-    if @venue.save
-      flash[:notice] = "Venue created!"
-      redirect_to venues_path
+    if current_user && current_user.admin?
+      @venue = Venue.new(venue_params)
+      if @venue.save
+        flash[:notice] = "Venue created!"
+        redirect_to venues_path
+      else
+        flash[:notice] = @venue.errors.full_messages
+        render :new
+      end
     else
-      flash[:notice] = @venue.errors.full_messages
-      render :new
+      redirect_to "http://www.reddit.com"
     end
   end
 
@@ -20,26 +24,35 @@ class VenuesController < ApplicationController
   end
 
   def update
-    @venue = Venue.find(params[:id])
-    @venue.update(venue_params)
-    if @venue.save
-      flash[:notice] = "I'm glad you stopped lying about yourself!"
-      redirect_to venues_path
+    if current_user && current_user.admin?
+      @venue = Venue.find(params[:id])
+      @venue.update(venue_params)
+      if @venue.save
+        flash[:notice] = "I'm glad you stopped lying about yourself!"
+        redirect_to venues_path
+      else
+        flash[:notice] = @venue.errors.full_messages
+        render :edit
+      end
     else
-      flash[:notice] = @venue.errors.full_messages
-      render :edit
+      redirect_to "http://www.reddit.com"
     end
   end
 
   def destroy
-    @venue = Venue.find(params[:id])
-    if @venue.destroy
-      flash[:notice] = "Goodbye Venue!"
+    if current_user && current_user.admin?
+      @venue = Venue.find(params[:id])
+      if @venue.destroy
+        flash[:notice] = "Goodbye Venue!"
+      else
+        flash[:notice] = "I'm sorry Dave, I can't do that."
+      end
+      redirect_to venues_path
     else
-      flash[:notice] = "I'm sorry Dave, I can't do that."
+      redirect_to "http://www.reddit.com"
     end
-    redirect_to venues_path
   end
+
 
   protected
 

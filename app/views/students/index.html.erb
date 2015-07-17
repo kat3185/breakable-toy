@@ -1,3 +1,4 @@
+<% if current_user && current_user.admin? %>
 <h1>Student Info</h1>
 
 <table>
@@ -13,7 +14,7 @@
       <td><%= link_to student.full_name, student_path(student.id) %></td>
       <td><%= student.email %></td>
       <td><%= student.courses.count %></td>
-      <td><%= link_to "Edit", edit_student_path(student) %></td>
+      <td><%= button_to "Edit", edit_student_path(student), method: :get, class: "button tiny round" %></td>
       <td>
         <%= button_to 'Delete',
           student_path(student.id),
@@ -23,3 +24,6 @@
   <% end %>
 </table>
 <br><br><%= link_to 'Back to classes list', courses_path %>
+<% else %>
+  You must be logged in as an administrator to view the list of students.
+<% end %>

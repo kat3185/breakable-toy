@@ -1,10 +1,14 @@
 class CourseRegistrationsController < ApplicationController
 
   def destroy
-    @registration = CourseRegistration.find(params[:id])
-    @registration.destroy
-    flash[:notice] = "Student removed."
-    redirect_to courses_path
+    if current_user && current_user.admin?
+      @registration = CourseRegistration.find(params[:id])
+      @registration.destroy
+      flash[:notice] = "Registation removed."
+      redirect_to courses_path
+    else
+      redirect_to "http://www.reddit.com"
+    end
   end
 
 end

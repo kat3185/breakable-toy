@@ -15,7 +15,10 @@
     <div class="post-body">
       <%= post.body %>
     </div>
-    <%= button_to "Edit Post", edit_post_path(post), class: "button tiny round" %> <%= button_to "Delete Post", post_path(post), method: :delete, class: "button tiny round" %>
+    <% if current_user && current_user.admin? %>
+      <%= button_to "Edit Post", edit_post_path(post), class: "button tiny round", method: :get %>
+      <%= button_to "Delete Post", post_path(post), method: :delete, class: "button tiny round" %>
+    <% end %>
   <%end%>
 </div>
 <div class="post-title">
