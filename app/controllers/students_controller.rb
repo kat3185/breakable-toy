@@ -19,18 +19,20 @@ class StudentsController < ApplicationController
     end
     if @student.id
       registrations = create_course_registrations(params[:student][:course_registrations])
-      Stripe.api_key = STRIPE_TEST_SECRET_KEY
-      token = params[:stripeToken]
-      begin
-        charge = Stripe::Charge.create(
-          amount: owed(registrations.count), # amount in cents, again
-          currency: "usd",
-          source: token,
-          description: "Example charge"
-        )
-      rescue Stripe::CardError => e
+      if false #remove to make functional
+        Stripe.api_key = STRIPE_TEST_SECRET_KEY
+        token = params[:stripeToken]
+        begin
+          charge = Stripe::Charge.create(
+            amount: owed(registrations.count), # amount in cents, again
+            currency: "usd",
+            source: token,
+            description: "Example charge"
+          )
+        rescue Stripe::CardError => e
+        end
       end
-      if charge && charge.paid
+      if true || charge && charge.paid #remove true to make functional
         registrations.each(&:process)
       end
       flash[:notice] = "Registeration complete!"
