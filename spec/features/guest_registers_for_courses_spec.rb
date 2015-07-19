@@ -43,10 +43,7 @@ feature 'guest registers for classes', %Q{
     fill_in "First name", with: "Emiline"
     fill_in "Last name", with: "Katsman"
     fill_in "Email", with: "EKaz@gmail.com"
-    click_button "Submit"
 
-    expect(page).to have_button("Register for #{date.second.strftime('%B')} Classes")
-    expect(page).to have_button("Register for #{date2.second.strftime('%B')} Classes")
     select "Follow", from: "registration_holder[first_role]", match: :first
     fill_in "Credit Card Number", with: "4242424242424242", match: :first
     fill_in "card_code", with: "123", match: :first
