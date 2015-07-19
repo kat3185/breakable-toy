@@ -1,0 +1,7 @@
+<% @course_reviews.each do |review| %>
+  <div>
+    <%= review.course.title if review.course %><br>
+    <%= review.name if review.name %><br>
+    <%= review.body %>
+  </div><hr>
+<%end%>

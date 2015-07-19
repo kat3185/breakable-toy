@@ -3,6 +3,18 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+  <div>
+    <%= fields_for @student do |reg_form| %>
+      <p>
+        <%= reg_form.label :first_name %>
+        <%= reg_form.text_field :first_name %>
+
+        <%= reg_form.label :last_name %>
+        <%= reg_form.text_field :last_name %>
+      </p>
+    <%end%>
+  </div>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email %>

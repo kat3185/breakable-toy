@@ -1,6 +1,6 @@
 <% if current_user && current_user.admin? %>
   <div class="small-12 columns">
-  <%= render partial: "course_form", locals: {course: @course, dates: @dates} %>
+  <%= render partial: "course_form", locals: {course: @course, dates: @dates, date: @date} %>
   </div>
 <% else %>
 You must be logged in as an administrator to create a class!

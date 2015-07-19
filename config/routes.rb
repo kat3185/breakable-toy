@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :course_reviews
   resources :students, only: [:index, :update, :edit, :destroy]
   resources :posts, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :meeting_dates, only: [:destroy]
 
   get "dojo", to: "dojos#index"
 end

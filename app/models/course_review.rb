@@ -1,5 +1,5 @@
 class CourseReview  < ActiveRecord::Base
-  has_one :course
+  belongs_to :course
 
   validates :body, presence: true
 end

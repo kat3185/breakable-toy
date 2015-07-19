@@ -31,6 +31,7 @@
         <% if current_user.admin? %>
           <li><%= link_to 'New Post', new_post_path %></li>
           <li><%= link_to 'New Course', new_course_path %></li>
+          <li><%= link_to "Student Feedback", course_reviews_path %></li>
           <li><%= link_to 'Students', students_path %></li>
         <% end %>
         <li><%= link_to 'Edit Account', edit_user_registration_path %></li>

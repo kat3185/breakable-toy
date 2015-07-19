@@ -8,13 +8,19 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
-    @dates = MeetingDate.all.map { |a| [a.month_weekday, a.id] }
+    @dates = [["", 0]] + MeetingDate.all.map { |a| [a.month_weekday, a.id] }
+    @date = MeetingDate.new
   end
 
   def create
     if current_user.admin?
       @course = Course.new(course_params)
-      @date = MeetingDate.find(params[:meeting_date])
+      if params[:meeting_date] == "0"
+        @date = create_dates(params[:course][:meeting_date][0][:first])
+        @date.save
+      else
+        @date = MeetingDate.find(params[:meeting_date])
+      end
       if @course.save
         flash[:notice] = "Your course was created!"
         CourseMeeting.create(course: @course, meeting_date: @date)
@@ -37,6 +43,7 @@ class CoursesController < ApplicationController
   def edit
     @course = Course.find_by(id: params[:id])
     @dates = MeetingDate.all.map { |a| [a.month_weekday, a.id] }
+    @date = MeetingDate.new
   end
 
   def update
@@ -80,5 +87,15 @@ class CoursesController < ApplicationController
   protected
   def course_params
     params.require(:course).permit(:title, :description, :time, :venue_id)
+  end
+
+  def create_dates(first_date)
+    date = MeetingDate.new
+    first = Date.parse(first_date)
+    date.first = first
+    date.second = first.next_day(7)
+    date.third = first.next_day(14)
+    date.fourth = first.next_day(21)
+    date
   end
 end
