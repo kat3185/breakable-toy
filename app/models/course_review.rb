@@ -1,4 +1,4 @@
-class CourseReview  < ActiveRecord::Base
+class CourseReview < ActiveRecord::Base
   belongs_to :course
 
   validates :body, presence: true

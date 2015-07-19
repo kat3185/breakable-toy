@@ -53,7 +53,6 @@ class VenuesController < ApplicationController
     end
   end
 
-
   protected
 
   def venue_params
