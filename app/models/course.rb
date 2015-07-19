@@ -6,6 +6,7 @@ class Course < ActiveRecord::Base
   has_many :students, through: :course_registrations
   has_many :course_meetings
   has_many :meeting_dates, through: :course_meetings
+  has_many :course_reviews
 
   validates :title, presence: true
   validates :description, presence: true

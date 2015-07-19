@@ -1,0 +1,15 @@
+<%= form_for course_review do |f| %>
+  <div>
+    <%= f.label :name, "Name (optional):" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <%= f.hidden_field(:course_id, value: course.id) %>
+
+  <%= f.submit 'Submit Review', class:"button round" %>
+<% end %>

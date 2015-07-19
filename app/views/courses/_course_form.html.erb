@@ -24,6 +24,16 @@
     <%= select_tag :meeting_date, options_for_select(dates) %>
   </div>
 
+  <div>
+    <% prefix = "course[meeting_date][]" %>
+    <%= fields_for prefix, date do |reg_form| %>
+      <p> <h6> New Date </h6>
+        <%= reg_form.label "First Date (YYYY-MM-DD)" %>
+        <%= reg_form.text_field :first %>
+      </p>
+    <%end%>
+  </div>
+
 
   <%= f.submit 'Submit Course', class:"button round" %>
 <% end %>

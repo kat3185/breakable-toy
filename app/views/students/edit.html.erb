@@ -1,3 +1,5 @@
-<div class="small-12 columns">
-<%= render partial: "student_form", locals: {student: @student} %>
-</div>
+<% if current_user && current_user.admin? %>
+  <div class="small-12 columns">
+    <%= render partial: "student_form", locals: {student: @student} %>
+  </div>
+<% end %>

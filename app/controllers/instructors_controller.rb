@@ -5,13 +5,17 @@ class InstructorsController < ApplicationController
   end
 
   def create
-    @instructor = Instructor.new(instructor_params)
-    if @instructor.save
-      flash[:notice] = "Instructor created!"
-      redirect_to instructors_path
+    if current_user && current_user.admin?
+      @instructor = Instructor.new(instructor_params)
+      if @instructor.save
+        flash[:notice] = "Instructor created!"
+        redirect_to instructors_path
+      else
+        flash[:notice] = @instructor.errors.full_messages
+        render :index
+      end
     else
-      flash[:notice] = @instructor.errors.full_messages
-      render :new
+      redirect_to "http://www.reddit.com"
     end
   end
 
@@ -20,27 +24,35 @@ class InstructorsController < ApplicationController
   end
 
   def update
-    @instructor = Instructor.find(params[:id])
-    @instructor.update(instructor_params)
-    if @instructor.save
-      flash[:notice] = "I'm glad you stopped lying about yourself!"
-      redirect_to instructors_path
+    if current_user && current_user.admin?
+      @instructor = Instructor.find(params[:id])
+      @instructor.update(instructor_params)
+      if @instructor.save
+        flash[:notice] = "I'm glad you stopped lying about yourself!"
+        redirect_to instructors_path
+      else
+        flash[:notice] = @instructor.errors.full_messages
+        render :edit
+      end
     else
-      flash[:notice] = @instructor.errors.full_messages
-      render :edit
+      redirect_to "http://www.reddit.com"
     end
   end
 
   def destroy
-    @instructor = Instructor.find(params[:id])
-    @instructor.destroy
-    flash[:message] = "Instructor Obliterated!"
-    redirect_to instructors_path
+    if current_user && current_user.admin?
+      @instructor = Instructor.find(params[:id])
+      @instructor.destroy
+      flash[:message] = "Instructor Obliterated!"
+      redirect_to instructors_path
+    else
+      redirect_to "http://www.reddit.com"
+    end
   end
 
   protected
-  
+
   def instructor_params
-    params.require(:instructor).permit(:full_name, :bio, :email)
+    params.require(:instructor).permit(:full_name, :body, :email)
   end
 end

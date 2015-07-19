@@ -1,34 +1,42 @@
-<%= @student.full_name %><br>
-<%= @student.email %>
-<br>
-<table>
-  <tr>
-    <th>Classes</th>
-    <th>Month</th>
-    <th>Role</th>
-    <th>Paid?</th>
-    <th>Delete</th>
-  </tr>
-  <% @student.courses.each do |course| %>
-    <tr>
-      <td><%= course.title %></td>
-      <td><%= course.meeting_dates.first.second.strftime('%B') %></td>
-      <td><%= course.course_registrations.where(student_id: params[:id]).first.role %></td>
-      <td><%= course.course_registrations.where(student_id: params[:id]).first.paid %></td>
-      <td>
-        <%= button_to 'Delete',
-          course_registration_path(course.course_registrations.where(student_id: params[:id]).first.id),
-          method: :delete, class: "button tiny round" %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<% if current_user  %>
+  <% if current_user.admin? || current_user.student == @student %>
+    <%= @student.full_name %><br>
+    <%= @student.email %>
+    <br>
+    <table>
+      <tr>
+        <th>Classes</th>
+        <th>Month</th>
+        <th>Role</th>
+        <th>Paid?</th>
+        <% if current_user.admin? %>
+          <th>Delete</th>
+        <% end %>
+      </tr>
+      <% @student.courses.each do |course| %>
+        <tr>
+          <td><%= course.title %></td>
+          <td><%= course.meeting_dates.first.second.strftime('%B') %></td>
+          <td><%= course.course_registrations.where(student_id: params[:id]).first.role %></td>
+          <td><%= course.course_registrations.where(student_id: params[:id]).first.paid %></td>
+          <% if current_user.admin? %>
+            <td>
+              <%= button_to 'Delete',
+                course_registration_path(course.course_registrations.where(student_id: params[:id]).first.id),
+                method: :delete, class: "button tiny round" %>
+            </td>
+          <%end%>
+        </tr>
+      <% end %>
+    </table>
 
-<% if @student.owes_money?(Date.today.month) %>
-  YOU SHOULD NOT SEE THIS
-<% elsif @student.owes_money?(Date.today.month.next) %>
-  STRIPE GOES HERE TOO
-  <% else %>
-  SUCCESS
+    <% if @student.owes_money?(Date.today.month) %>
+      YOU SHOULD NOT SEE THIS
+    <% elsif @student.owes_money?(Date.today.month.next) %>
+      STRIPE GOES HERE TOO
+    <% else %>
+      SUCCESS
+    <%end%>
+  <% end %>
 <% end %>
 <br><br><%= link_to 'Back to classes list', courses_path %>

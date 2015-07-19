@@ -1,5 +1,27 @@
 
   <%= @class.title %>
+  <%= @class.time %><br>
+  <div class="course-title">
+    <%= link_to "#{@class.title}: #{@class.description}", course_path(@class) %><br>
+  </div>
+  <div class="course-info">
+    <%= @class.venue.building_name %><br>
+    <% @class.instructors.each do |instructor| %>
+      <%= instructor.full_name %>,
+      <%end%>
+      <b>more info</b>
+    <br>
+    <%= @class.meeting_dates.first.first.strftime('%B %e') %>,
+    <%= @class.meeting_dates.first.second.strftime('%B %e') if @class.meeting_dates.first.second %>,
+    <%= @class.meeting_dates.first.third.strftime('%B %e') if @class.meeting_dates.first.third %>,
+    <%= @class.meeting_dates.first.fourth.strftime('%B %e') if @class.meeting_dates.first.fourth %>
+    <br>
+    Leads: <%= (@class.course_registrations.map { |student| student.role }).count("Lead") %>
+    Follows: <%= (@class.course_registrations.map { |student| student.role }).count("Follow") %>
+
+    <%= render partial: "course_review_form", locals: { course_review: @course_review, course: @class } %>
+
+  <% if current_user && current_user.admin? %>
     <table>
       <tr>
         <th>Student</th>
@@ -22,4 +44,17 @@
         </tr>
       <% end %>
     </table>
+    <div class="course-buttons">
+      <div class="inline"><%= button_to 'Edit Course', edit_course_path(@class), class: "button tiny round", method: :get %></div>
+      <div class="inline"><%= button_to "Delete Course", course_path(@class.id), method: :delete, class: "button tiny round" %></div>
+    </div>
+
+    <%if @course_reviews != [] %>
+      <% @course_reviews.each do |review| %>
+        <%= review.name if review.name %><br>
+        <%= review.body %>
+      <%end%>
+    <%end%>
+
+  <% end %>
   <br><br><%= link_to 'Back to classes list', courses_path %>

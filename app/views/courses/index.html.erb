@@ -4,7 +4,10 @@
 <h3><%= month.first.second.strftime('%B') %> Classes</h3><hr>
   <% month.each do |weekday| %>
   <div class="medium-6 columns">
-    <h5><%= weekday.first.strftime( '%A' )%></h5><hr>
+    <h5><%= weekday.first.strftime( '%A' )%></h5>
+    <% if current_user && current_user.admin? && weekday.courses == [] %>
+    <%= button_to "Delete #{weekday.first.strftime( '%A' )}", meeting_date_path(weekday.id), method: :delete, class: "button tiny round" %>
+    <%end%><hr>
     <% weekday.courses.each do |course| %>
     <%= course.time %><br>
     <div class="course-title">
@@ -24,24 +27,19 @@
       <br>
       Leads: <%= (course.course_registrations.map { |student| student.role }).count("Lead") %>
       Follows: <%= (course.course_registrations.map { |student| student.role }).count("Follow") %>
-      <div>
+      <% if current_user && current_user.admin? %>
         <div class="course-buttons">
-          <div class="inline"><%= button_to 'Edit Course', edit_course_path(course), class: "button tiny round" %></div>
+          <div class="inline"><%= button_to 'Edit Course', edit_course_path(course), class: "button tiny round", method: :get %></div>
           <div class="inline"><%= button_to "Delete Course", course_path(course.id), method: :delete, class: "button tiny round" %></div>
         </div>
-      </div>
+      <%end%>
     </div>
       <hr>
     <%end%>
   </div>
-
   <% end %>
 
-  <% if current_user && current_user.student %>
-    <%= button_to "Register for #{month.first.second.strftime('%B')} Classes", new_student_registration_holder_path(current_user.student.id), method: :get, class: "button round" %>
-  <%else%>
-    <%= button_to "Register for #{month.first.second.strftime('%B')} Classes", new_student_path, method: :get, class: "button round" %>
-  <%end%>
+    <%= button_to "Register for #{month.first.second.strftime('%B')} Classes", new_student_path(month.first.first.month), method: :get, class: "button round", data: { month: month.first.first.month } %>
 </div>
 
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717144554) do
+ActiveRecord::Schema.define(version: 20150717205005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,14 @@ ActiveRecord::Schema.define(version: 20150717144554) do
     t.datetime "updated_at"
   end
 
+  create_table "course_reviews", force: :cascade do |t|
+    t.string   "name"
+    t.text     "body",       null: false
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string   "title",       null: false
     t.text     "description", null: false
@@ -50,7 +58,7 @@ ActiveRecord::Schema.define(version: 20150717144554) do
 
   create_table "instructors", force: :cascade do |t|
     t.string   "full_name",  null: false
-    t.text     "bio",        null: false
+    t.text     "body",       null: false
     t.string   "email",      null: false
     t.string   "photo_url"
     t.string   "video_url"
@@ -72,25 +80,6 @@ ActiveRecord::Schema.define(version: 20150717144554) do
     t.string   "title",      null: false
     t.text     "body",       null: false
     t.integer  "user_id",    null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "registration_holders", force: :cascade do |t|
-    t.string   "first_role"
-    t.string   "second_role"
-    t.string   "third_role"
-    t.string   "fourth_role"
-    t.string   "fifth_role"
-    t.string   "sixth_role"
-    t.integer  "first_course"
-    t.integer  "second_course"
-    t.integer  "third_course"
-    t.integer  "fourth_course"
-    t.integer  "fifth_course"
-    t.integer  "sixth_course"
-    t.integer  "student_id"
-    t.integer  "month"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -3,7 +3,7 @@ class MeetingDate  < ActiveRecord::Base
   has_many :courses, through: :course_meetings
 
   def month_weekday
-    first.strftime('%A %B')
+    third.strftime("%A %B")
   end
 
   validates :first, presence: true

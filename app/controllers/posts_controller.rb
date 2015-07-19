@@ -4,14 +4,18 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user = current_user
-    if @post.save
-      flash[:notice] = "Post created!"
-      redirect_to posts_path
+    if current_user && current_user.admin?
+      @post = Post.new(post_params)
+      @post.user = current_user
+      if @post.save
+        flash[:notice] = "Post created!"
+        redirect_to posts_path
+      else
+        flash[:notice] = @post.errors.full_messages
+        render :new
+      end
     else
-      flash[:notice] = @post.errors.full_messages
-      render :new
+      redirect_to "http://www.reddit.com"
     end
   end
 
@@ -24,25 +28,33 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-    @post.update(post_params)
-    if @post.save
-      flash[:notice] = "Good news: You fixed that post!"
-      redirect_to root_path
+    if current_user && current_user.admin?
+      @post = Post.find(params[:id])
+      @post.update(post_params)
+      if @post.save
+        flash[:notice] = "Good news: You fixed that post!"
+        redirect_to root_path
+      else
+        flash[:notice] = @course.errors.full_messages
+        render :edit
+      end
     else
-      flash[:notice] = @course.errors.full_messages
-      render :edit
+      redirect_to "http://www.reddit.com"
     end
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    if @post.destroy
-      flash[:notice] = "That post was poorly written."
+    if current_user && current_user.admin?
+      @post = Post.find(params[:id])
+      if @post.destroy
+        flash[:notice] = "That post was poorly written."
+      else
+        flash[:notice] = "I'm sorry Dave, I can't do that."
+      end
+      redirect_to root_path
     else
-      flash[:notice] = "I'm sorry Dave, I can't do that."
+      redirect_to "http://www.reddit.com"
     end
-    redirect_to root_path
   end
 
   protected

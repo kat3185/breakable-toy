@@ -7,17 +7,15 @@ Rails.application.routes.draw do
   resources :course_registrations, only: [:destroy]
   resources :instructors, only: [:index, :create, :edit, :update, :destroy]
   resources :venues, only: [:index, :new, :create, :edit, :update, :destroy]
-
-  resources :students, only: [:new, :create] do
-    resources :registration_holders, only: [:new, :index, :create]
-  end
-
+  resources :students, only: [:index, :update, :edit, :destroy, :new, :create]
+  
   resources :students, only: [:show] do
     resources :course_registrations, only: [:create]
   end
+  resources :course_reviews
 
-  resources :students, only: [:index, :update, :edit, :destroy]
   resources :posts, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :meeting_dates, only: [:destroy]
 
   get "dojo", to: "dojos#index"
 end
