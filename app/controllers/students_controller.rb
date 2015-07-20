@@ -16,7 +16,6 @@ class StudentsController < ApplicationController
     else
       @student = Student.new(student_params)
       @student.save
-      binding.pry
     end
     if @student.id
       registrations = create_course_registrations(params[:student][:course_registrations])
