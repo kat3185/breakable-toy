@@ -11,10 +11,9 @@ RSpec.describe CourseRegistration, type: :model do
   end
 
   it "#process" do
-    complete_holder = FactoryGirl.create(:registration_holder, :with_courses)
-    registrations = complete_holder.create_each_registration
+    registrations = FactoryGirl.create_list(:course_registration, 3)
 
-    expect(registrations.count).to eq(4)
+    expect(registrations.count).to eq(3)
     registrations.each do |registration|
       registration.process
     end

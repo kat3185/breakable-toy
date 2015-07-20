@@ -22,9 +22,10 @@ class StudentsController < ApplicationController
       if false #remove to make functional
         Stripe.api_key = STRIPE_TEST_SECRET_KEY
         token = params[:stripeToken]
+
         begin
           charge = Stripe::Charge.create(
-            amount: owed(registrations.count), # amount in cents, again
+            amount: owed(registrations.count, params[:student][:discount][:current_student]), # amount in cents, again
             currency: "usd",
             source: token,
             description: "Example charge"
@@ -90,11 +91,13 @@ class StudentsController < ApplicationController
     registrations
   end
 
-  def owed(course_count)
+  def owed(course_count, discount)
     if course_count > 1
-      return 9000
+      return 9000 unless discount == 1
+      return 7000
     elsif course_count == 1
-      return 5000
+      return 5000 unless discount == 1
+      return 4000
     else
       return "ERROR"
     end

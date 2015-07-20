@@ -43,8 +43,9 @@ feature 'guest registers for classes', %Q{
     fill_in "First name", with: "Emiline"
     fill_in "Last name", with: "Katsman"
     fill_in "Email", with: "EKaz@gmail.com"
-
-    select "Follow", from: "registration_holder[first_role]", match: :first
+    save_and_open_page
+    page.check name: "Lindy 1a", match: :first
+    select "Follow", from: "students[course_registrations][][role]", match: :first
     fill_in "Credit Card Number", with: "4242424242424242", match: :first
     fill_in "card_code", with: "123", match: :first
     select "1 - January", from: "card_month", match: :first
@@ -89,14 +90,15 @@ feature 'guest registers for classes', %Q{
     fill_in "First name", with: "Robbie"
     fill_in "Last name", with: "You"
     fill_in "Email", with: "YouRock@gmail.com"
-    click_button "Submit"
 
-    expect(page).to have_button("Register for #{date.second.strftime('%B')} Classes")
-    expect(page).to have_button("Register for #{date2.second.strftime('%B')} Classes")
-    select "Follow", from: "registration_holder[first_role]", match: :first
-    select "Lead", from: "registration_holder[second_role]", match: :first
-    select "Lead", from: "registration_holder[third_role]", match: :first
-    select "Follow", from: "registration_holder[fourth_role]", match: :first
+    check name: "students[course_registrations][][course_id]", match: :first
+    select "Follow", from: "students[course_registrations][][role]", match: :first
+    check name: "students[course_registrations][][course_id]", match: :second
+    select "Lead", from: "students[course_registrations][][role]", match: :second
+    check name: "students[course_registrations][][course_id]", match: :third
+    select "Lead", from: "students[course_registrations][][role]", match: :third
+    check name: "students[course_registrations][][course_id]", match: :fourth
+    select "Follow", from: "students[course_registrations][][role]", match: :fourth
     fill_in "Credit Card Number", with: "4242424242424242", match: :first
     fill_in "card_code", with: "123", match: :first
     select "1 - January", from: "card_month", match: :first
