@@ -5,6 +5,7 @@ class MyDevise::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
+    @student = Student.new
     super
     if resource.save
       if !Student.where("lower(email) = ?", resource.email.downcase).empty?
@@ -13,8 +14,8 @@ class MyDevise::RegistrationsController < Devise::RegistrationsController
         @student = Student.new(student_params)
         @student.save
       end
-      @student.user = resource
-      resource.student = @student
+        @student.user = resource
+        resource.student = @student
     end
   end
 

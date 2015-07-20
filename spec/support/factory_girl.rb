@@ -46,7 +46,7 @@ FactoryGirl.define do
 
   factory :instructor do
     full_name "Cari Meisel"
-    bio "Very very very short."
+    body "Very very very short."
     email "Cmeis@nss.com"
 
     trait :with_course do
@@ -91,21 +91,4 @@ FactoryGirl.define do
     course
     instructor
   end
-
-  factory :registration_holder do
-    first_role "Follow"
-    second_role "Follow"
-    third_role "Lead"
-    fourth_role "None"
-    month 7
-
-    student
-    trait :with_courses do
-      after(:create) do |holder|
-        FactoryGirl.create_list(:course, 4, :with_meetings)
-        holder.assign_courses
-      end
-    end
-  end
-
 end

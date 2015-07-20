@@ -1,42 +1,59 @@
 <%= form_for student do |f|%>
-  <% if current_user && current_user.student %>
-  <%else%>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
+  <div class="small-12 columns">
+    <% if current_user && current_user.student %>
+    <%else%>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
 
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
 
-  <%= f.label :email%>
-  <%= f.text_field :email %>
-  <%end%>
-  <div>
-    <% prefix = "student[course_registrations][]" %>
-    <% MeetingDate.where('extract(month from third) = ?', desired_month).each do |date| %>
+      <%= f.label :email%>
+      <%= f.text_field :email %>
+    <%end%>
+
+    <%= fields_for "student[discount]" do |discount| %>
+      <%= discount.label "I qualify for a student discount (id required at door):", style: "float:left" %>
+      <%= discount.select :current_student, [["No", 0], ["Yes", 1]], style: "float:right" %>
+    <%end%>
+  </div>
+  <% prefix = "student[course_registrations][]" %>
+  <% MeetingDate.where('extract(month from third) = ?', desired_month).each do |date| %>
+  <div class="medium-6 columns">
+    <%= date.first.strftime('%A') %>
       <% date.courses.each do |course| %>
         <%= fields_for prefix, @registration do |reg_form| %>
           <p>
-            <%= reg_form.label "#{course.title}" %>
-            <%= reg_form.check_box :course_id, {}, checked_value = "#{course.id}" %>
-            <%= reg_form.label "Role: " %>
-            <%= reg_form.select(:role, ["None", "Lead", "Follow"]) %>
+            <div class="field">
+              <%= reg_form.label "#{course.title}: #{course.description}", style: "float:left" %>
+              <%= reg_form.check_box :course_id, {style: "float:right"}, checked_value = "#{course.id}" %>
+            </div><br>
+            <div class="field">
+              <%= reg_form.label "Role: " %>
+              <%= reg_form.select(:role, ["None", "Lead", "Follow"]) %>
+            </div>
           </p>
         <%end%>
       <%end%>
-    <%end%>
+    </div>
+  <%end%>
+  <div class="medium-6 columns">
+  <div>Current Total: $<span class="running-total">0</span></div>
+    <div class="field">
+      <%= label_tag :card_number, "Credit Card Number" %>
+      <%= text_field_tag :card_number, nil, name: nil, data: {stripe: "number"}  %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_code, "Security Code on Card (CVC)" %>
+      <%= text_field_tag :card_code, nil, name: nil, data: {stripe: "cvc"} %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_month, "Card Expiration" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", data: {stripe: "exp-month"}} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", data: {stripe: "exp-year"}} %>
+    </div>
   </div>
-  <div class="field">
-    <%= label_tag :card_number, "Credit Card Number" %>
-    <%= text_field_tag :card_number, nil, name: nil, data: {stripe: "number"}  %>
+  <div class="small-12 columns">
+    <%= f.submit 'Submit', class: "button round", id: "pay_now" %>
   </div>
-  <div class="field">
-    <%= label_tag :card_code, "Security Code on Card (CVC)" %>
-    <%= text_field_tag :card_code, nil, name: nil, data: {stripe: "cvc"} %>
-  </div>
-  <div class="field">
-    <%= label_tag :card_month, "Card Expiration" %>
-    <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", data: {stripe: "exp-month"}} %>
-    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", data: {stripe: "exp-year"}} %>
-  </div>
-  <%= f.submit 'Submit', class: "button round", id: "pay_now" %>
 <%end%>

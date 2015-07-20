@@ -5,32 +5,33 @@
 
   <div>
     <%= fields_for @student do |reg_form| %>
-      <p>
+      <div>
         <%= reg_form.label :first_name %>
-        <%= reg_form.text_field :first_name %>
-
+        <%= reg_form.text_field :first_name, required: true %>
+      </div>
+      <div>
         <%= reg_form.label :last_name %>
-        <%= reg_form.text_field :last_name %>
-      </p>
+        <%= reg_form.text_field :last_name, required: true %>
+      </div>
     <%end%>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "off", required: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", required: true %>
   </div>
 
   <div class="actions">
