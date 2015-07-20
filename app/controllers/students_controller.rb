@@ -19,7 +19,6 @@ class StudentsController < ApplicationController
     end
     if @student.id
       registrations = create_course_registrations(params[:student][:course_registrations])
-      binding.pry
       if false #remove to make functional
         Stripe.api_key = STRIPE_TEST_SECRET_KEY
         token = params[:stripeToken]

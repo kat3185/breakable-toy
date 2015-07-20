@@ -36,4 +36,4 @@ $('#new_student #student_discount_current_student').change(function() {
   } else {
     $( "span.running-total" ).text(doubleClass);
   }
-})
+});
