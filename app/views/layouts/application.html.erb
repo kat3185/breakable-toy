@@ -10,7 +10,7 @@
 
 <div class="row">
 
-  <div class="medium-3 columns side-nav">
+  <div class="small-12 medium-3 columns side-nav">
     <%- flash.each do |key, value| -%>
       <div class="flash flash-<%= key %>">
         <%= value %>
@@ -43,19 +43,19 @@
     </ul><hr>
     <h3>Class Pricing</h3>
     Single Series
-    <table class="side-nav center-table">
+    <table align="center" class="center">
       <tr><th></th><th>Online</th><th>At the door</th></tr>
       <tr><td>Student</td><td>$40</td><td>$50</td></tr>
       <tr><td>General</td><td>$50</td><td>$60</td></tr>
     </table>
     Multiple Series
-    <table class="side-nav center-table">
+    <table align="center" class="center">
       <tr><th></th><th>Online</th><th>At the door</th></tr>
       <tr><td>Student</td><td>$70</td><td>$90</td></tr>
       <tr><td>General</td><td>$90</td><td>$110</td></tr>
     </table>
   </div>
-  <div class="medium-9 end columns">
+  <div class="small-12 medium-9 end columns">
     <%= yield %>
   </div>
 

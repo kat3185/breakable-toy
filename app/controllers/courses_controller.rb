@@ -86,7 +86,7 @@ class CoursesController < ApplicationController
 
   protected
   def course_params
-    params.require(:course).permit(:title, :description, :time, :venue_id)
+    params.require(:course).permit(:title, :description, :time, :body, :venue_id)
   end
 
   def create_dates(first_date)

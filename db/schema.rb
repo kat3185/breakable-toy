@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150717205005) do
   create_table "courses", force: :cascade do |t|
     t.string   "title",       null: false
     t.text     "description", null: false
+    t.text     "body"
     t.string   "time"
     t.integer  "venue_id"
     t.datetime "created_at"

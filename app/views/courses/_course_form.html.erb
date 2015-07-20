@@ -15,6 +15,11 @@
   </div>
 
   <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <div>
     <%= f.label :venue_id %>
     <%= f.select :venue_id, Venue.all.map {|a| [a.building_name, a.id] } %>
   </div>

@@ -105,16 +105,19 @@ user1.password = "password"
 user1.password_confirmation = "password"
 user1.role = "admin"
 user1.save!
+Student.find_or_create_by(first_name: "Admin", last_name: "McAdmin", email: user1.email, user: user1)
 
 user2 = User.find_or_create_by(email: "user@user.com")
 user2.password = "password"
 user2.password_confirmation = "password"
 user2.save!
+Student.find_or_create_by(first_name: "User1", last_name: "McUser", email: user2.email, user: user2)
 
 user3 = User.find_or_create_by(email: "user2@user.com")
 user3.password = "password"
 user3.password_confirmation = "password"
 user3.save!
+Student.find_or_create_by(first_name: "User2", last_name: "McUser", email: user3.email, user: user3)
 puts "Created users."
 
 Post.find_or_create_by(title: "July Classes Up!", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", user: user1)
