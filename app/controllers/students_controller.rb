@@ -79,7 +79,7 @@ class StudentsController < ApplicationController
   def create_course_registrations(course_list)
     registrations = Array.new
     course_list.each do |course|
-      if course[:course_id] != "0" && course[:role] != "None"
+      if course[:course_id] != "0" && course[:role] != ""
         registration = CourseRegistration.new(course_id: course[:course_id],
                                               student: @student,
                                               role: course[:role])
