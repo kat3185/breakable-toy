@@ -8,6 +8,7 @@ $mid-red: #770000;
 $dark-red: #510000;
 $light-red: #990808;
 $lighter-red: #B92020;
+$red: #ff0000;
 
 $side-nav-background: $medium-yellow;
 
@@ -22,6 +23,12 @@ body {
 
 .course-info {
   font-size: 80%;
+}
+
+.course-info span img {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }
 
 .instructor-title {
@@ -104,4 +111,9 @@ body {
 
 table.center {
   background-color: $side-nav-background;
+  text-align: center;
+}
+
+.card-errors {
+  color: $red;
 }

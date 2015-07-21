@@ -7,8 +7,9 @@
     <h5><%= weekday.first.strftime( '%A' )%></h5>
     <% if current_user && current_user.admin? && weekday.courses == [] %>
     <%= button_to "Delete #{weekday.first.strftime( '%A' )}", meeting_date_path(weekday.id), method: :delete, class: "button tiny round" %>
-    <%end%><hr>
+    <%end%>
     <% weekday.courses.each do |course| %>
+    <hr>
     <%= course.time %><br>
     <div class="course-title">
       <%= link_to "#{course.title}: #{course.description}", course_path(course) %><br>
@@ -34,11 +35,12 @@
         </div>
       <%end%>
     </div>
-      <hr>
+
     <%end%>
+    <br>
   </div>
   <% end %>
-
+  <hr>
     <%= button_to "Register for #{month.first.second.strftime('%B')} Classes", new_student_path(month.first.first.month), method: :get, class: "button round", data: { month: month.first.first.month } %>
 </div>
 

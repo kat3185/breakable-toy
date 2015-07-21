@@ -1,18 +1,35 @@
 <div class="small-12 columns">
 <% @instructors.each do |instructor| %>
-PICTURE
-<div class="instructor-title"> <%= instructor.full_name %> <span><%= instructor.email %>
+
+<div class="instructor-title">
+<%= instructor.full_name %> <span><%= instructor.email %>
   <% if current_user && current_user.admin? %>
     <%= button_to 'Edit Instructor', edit_instructor_path(instructor), class: "button tiny round", method: :get %>
     <%= button_to 'Delete Instructor', instructor_path(instructor), method: :delete, class: "button tiny round" %></span>
   <%end%>
   </div>
-<div class="course-info"><%= instructor.body %></div>
-VIDEO<br>
+<div class="course-info">
+  <span>
+    <% if instructor.photo_url %>
+      <%= image_tag instructor.photo_url, size: '125', alt: "New School Swing" %>
+    <%end%>
+  </span>
+  <%= instructor.body %>
+</div>
+<div>
+  <% if instructor.video_url %>
+  <iframe width="666" height="375" src="<%= instructor.video_url %>" frameborder="0" allowfullscreen>
+  </iframe>
+  <%else%>
+    [VIDEO]
+  <%end%>
+</div><br>
 <hr>
 <%end%>
+<% if current_user && current_user.admin? %>
 <div class="instructor-title"> Add a new instructor </div>
 <div>
 <%= render partial: "instructor_form", locals: {instructor: @instructor} %>
 </div>
+<%end%>
 </div>

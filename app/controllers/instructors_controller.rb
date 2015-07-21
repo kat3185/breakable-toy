@@ -53,6 +53,6 @@ class InstructorsController < ApplicationController
   protected
 
   def instructor_params
-    params.require(:instructor).permit(:full_name, :body, :email)
+    params.require(:instructor).permit(:full_name, :body, :email, :photo_url, :video_url)
   end
 end
