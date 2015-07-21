@@ -8,6 +8,7 @@ $mid-red: #770000;
 $dark-red: #510000;
 $light-red: #990808;
 $lighter-red: #B92020;
+$red: #ff0000
 
 $side-nav-background: $medium-yellow;
 
@@ -25,9 +26,9 @@ body {
 }
 
 .course-info span img {
-    float: left;
-    margin-right: 15px;
-    margin-bottom: 15px;
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }
 
 .instructor-title {
@@ -114,5 +115,5 @@ table.center {
 }
 
 .card-errors {
-  color: red;
+  color: $red;
 }
