@@ -24,6 +24,12 @@ body {
   font-size: 80%;
 }
 
+.course-info span img {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
 .instructor-title {
   font-size: 125%;
   font-weight: bold;
@@ -104,4 +110,9 @@ body {
 
 table.center {
   background-color: $side-nav-background;
+  text-align: center;
+}
+
+.card-errors {
+  color: red;
 }

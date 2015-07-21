@@ -16,7 +16,7 @@ function stripeResponseHandler(status, response) {
   var $form = $('#new_student');
 
   if (response.error) {
-    // Show the errors on the form
+    $("div.card-errors").text(response.error.message);
     $form.find('#pay_now').prop('disabled', false);
   } else {
     // response contains id and card, which contains additional card details

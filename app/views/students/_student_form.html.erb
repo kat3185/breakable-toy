@@ -37,7 +37,7 @@
       <%end%>
     </div>
   <%end%>
-  <div class="medium-6 columns">
+  <div class="medium-6 end columns">
   <div>Current Total: $<span class="running-total">0</span></div>
     <div class="field">
       <%= label_tag :card_number, "Credit Card Number" %>
@@ -52,8 +52,11 @@
       <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", data: {stripe: "exp-month"}} %>
       <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", data: {stripe: "exp-year"}} %>
     </div>
+    <div class="card-errors">
+    </div>
   </div>
   <div class="small-12 columns">
     <%= f.submit 'Submit', class: "button round", id: "pay_now" %>
   </div>
+
 <%end%>
