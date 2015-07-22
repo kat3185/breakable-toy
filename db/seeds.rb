@@ -118,6 +118,13 @@ user3.password = "password"
 user3.password_confirmation = "password"
 user3.save!
 Student.find_or_create_by(first_name: "User2", last_name: "McUser", email: user3.email, user: user3)
+
+user4 = User.find_or_create_by(email: "hawhy@user.com")
+user4.password = "password"
+user4.password_confirmation = "password"
+user4.role = "admin"
+user4.save!
+Student.find_or_create_by(first_name: "Laule't'a", last_name: "Kaaaahn", email: user4.email, user: user4)
 puts "Created users."
 
 Post.find_or_create_by(title: "July Classes Up!", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", user: user1)
