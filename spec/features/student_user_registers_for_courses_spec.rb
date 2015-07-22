@@ -11,7 +11,7 @@ feature 'user registers for classes', %Q{
   [x] Registering for courses creates the appropriate course_registrations objects
 } do
 
-  scenario "user with an associated student registers for a class", js: true do
+  pending "user with an associated student registers for a class", js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -51,7 +51,7 @@ feature 'user registers for classes', %Q{
     click_button "Register for #{date.second.strftime('%B')} Classes"
 
     all("input[type=checkbox]").each(&:click)
-    
+
     all("select#student_course_registrations__role").each do |menu|
       menu.select("Follow")
     end
