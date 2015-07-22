@@ -50,10 +50,9 @@ feature 'user registers for classes', %Q{
     visit courses_path
     click_button "Register for #{date.second.strftime('%B')} Classes"
 
-    all('input[type=checkbox]').each do |checkbox|
-      checkbox.click
-    end
-    all('select#student_course_registrations__role').each do |menu|
+    all("input[type=checkbox]").each(&:click)
+    
+    all("select#student_course_registrations__role").each do |menu|
       menu.select("Follow")
     end
 
@@ -64,7 +63,7 @@ feature 'user registers for classes', %Q{
 
     click_button "Submit"
     sleep(5)
-    
+
     expect(kevin.courses.first).to be_a(Course)
     expect(kevin.course_registrations.first).to be_a(CourseRegistration)
     expect(kevin.courses.count).to eq(4)

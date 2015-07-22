@@ -90,10 +90,9 @@ feature 'guest registers for classes', %Q{
     fill_in "Last name", with: "You"
     fill_in "Email", with: "YouRock@gmail.com"
 
-    all('input[type=checkbox]').each do |checkbox|
-      checkbox.click
-    end
-    all('select#student_course_registrations__role').each do |menu|
+    all("input[type=checkbox]").each(&:click)
+
+    all("select#student_course_registrations__role").each do |menu|
       menu.select("Follow")
     end
 
