@@ -21,6 +21,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.order("created_at DESC").limit(3)
+    @course_review = CourseReview.new
   end
 
   def edit

@@ -2,6 +2,6 @@
   <div>
     <%= review.course.title if review.course %><br>
     <%= review.name if review.name %><br>
-    <%= review.body %>
+    <%= review.created_at %>: <%= review.body %>
   </div><hr>
 <%end%>

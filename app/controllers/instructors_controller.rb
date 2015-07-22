@@ -24,8 +24,8 @@ class InstructorsController < ApplicationController
   end
 
   def update
-    if current_user && current_user.admin?
-      @instructor = Instructor.find(params[:id])
+    @instructor = Instructor.find(params[:id])
+    if current_user && current_user.admin? || current_user.instructor == @instructor
       @instructor.update(instructor_params)
       if @instructor.save
         flash[:notice] = "I'm glad you stopped lying about yourself!"

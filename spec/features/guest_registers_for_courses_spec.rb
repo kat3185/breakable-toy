@@ -43,19 +43,18 @@ feature 'guest registers for classes', %Q{
     fill_in "First name", with: "Emiline"
     fill_in "Last name", with: "Katsman"
     fill_in "Email", with: "EKaz@gmail.com"
-    save_and_open_page
-    page.check name: "Lindy 1a", match: :first
-    select "Follow", from: "students[course_registrations][][role]", match: :first
-    fill_in "Credit Card Number", with: "4242424242424242", match: :first
-    fill_in "card_code", with: "123", match: :first
-    select "1 - January", from: "card_month", match: :first
-    select "2016", from: "card_year", match: :first
-    click_button "Register for #{date.second.strftime('%B')} Classes"
-
-    expect(page).to have_content("Registration Created!")
+    find(:checkbox, "#{Course.first.title}", match: :first).set(true)
+    select "Follow", from: "Role:", match: :first
+    fill_in "Credit Card Number", with: "4242424242424242"
+    fill_in "card_code", with: "123"
+    select "1 - January", from: "card_month"
+    select "2016", from: "card_year"
+    click_button "Submit"
+    sleep(5)
     emiline = Student.find_by(first_name: "Emiline")
     expect(emiline.courses.first).to be_a(Course)
     expect(emiline.course_registrations.first).to be_a(CourseRegistration)
+    expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
 
   pending "guest registers for four classes", js: true do
@@ -91,25 +90,23 @@ feature 'guest registers for classes', %Q{
     fill_in "Last name", with: "You"
     fill_in "Email", with: "YouRock@gmail.com"
 
-    check name: "students[course_registrations][][course_id]", match: :first
-    select "Follow", from: "students[course_registrations][][role]", match: :first
-    check name: "students[course_registrations][][course_id]", match: :second
-    select "Lead", from: "students[course_registrations][][role]", match: :second
-    check name: "students[course_registrations][][course_id]", match: :third
-    select "Lead", from: "students[course_registrations][][role]", match: :third
-    check name: "students[course_registrations][][course_id]", match: :fourth
-    select "Follow", from: "students[course_registrations][][role]", match: :fourth
-    fill_in "Credit Card Number", with: "4242424242424242", match: :first
-    fill_in "card_code", with: "123", match: :first
-    select "1 - January", from: "card_month", match: :first
-    select "2016", from: "card_year", match: :first
-    click_button "Register for #{date.second.strftime('%B')} Classes"
+    all("input[type=checkbox]").each(&:click)
 
-    expect(page).to have_content("Registration Created!")
+    all("select#student_course_registrations__role").each do |menu|
+      menu.select("Follow")
+    end
+
+    fill_in "Credit Card Number", with: "4242424242424242"
+    fill_in "card_code", with: "123"
+    select "1 - January", from: "card_month"
+    select "2016", from: "card_year"
+    click_button "Submit"
+    sleep(5)
     robbie = Student.find_by(first_name: "Robbie")
     expect(robbie.courses.first).to be_a(Course)
     expect(robbie.course_registrations.first).to be_a(CourseRegistration)
     expect(robbie.courses.count).to eq(4)
     expect(robbie.course_registrations.count).to eq(4)
+    expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
 end

@@ -8,8 +8,9 @@
     <%= f.label :body %>
     <%= f.text_area :body %>
   </div>
-
-  <%= f.hidden_field(:course_id, value: course.id) %>
+  <%if course %>
+    <%= f.hidden_field(:course_id, value: course.id) %>
+  <%end%>
 
   <%= f.submit 'Submit Review', class:"button round" %>
 <% end %>

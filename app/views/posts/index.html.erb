@@ -43,3 +43,16 @@
 <div class="post-body">
   Visit the <%= link_to "Dojo page", dojo_path %> for more info.
 </div>
+<div class="post-title">
+  Please give us feedback on how we're doing.
+</div>
+<div class="post-body">
+    We'd love your feedback! We want to make the studio the most useful and fun studio we can so anything you can say to help us out would be great.
+    Positive feedback will help us know what to keep doing well. Constructive criticism will help us focus on what we should improve.
+    Please remember we're passionate folks trying to make the world a better place through swing dancing. For more on that, <%= link_to "read this",
+    "http://www.mikethegirl.com/1/post/2011/11/the-importance-of-non-evil.html" %>. For specific ideas of what we'd like to know: Who are your
+    favorite teachers and why? Are there teachers that need work and, if so, what could they do better? What classes do you like and why? What classes weren't
+    as great and why? What classes would you like to see more of? What classes don't we teach that you'd like us to teach?
+    What do you think of our audition process? Thanks in advance!<br><br>
+  <%= render partial: "/courses/course_review_form.html.erb", locals: { course_review: @course_review, course: false } %>
+</div>
