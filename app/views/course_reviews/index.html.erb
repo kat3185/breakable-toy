@@ -1,3 +1,4 @@
+<%= paginate @course_reviews %>
 <% @course_reviews.each do |review| %>
   <div>
     <%= review.course.title if review.course %><br>

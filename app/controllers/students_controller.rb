@@ -7,13 +7,13 @@ class StudentsController < ApplicationController
   end
 
   def index
-    @students = Student.all
+    @students = Student.order("first_name").page(params[:page]).per(25)
   end
 
   def create
     @student = current_user_or_create(current_user, student_params)
     registrations = create_course_registrations(params[:student][:course_registrations])
-    if false #stripe disabled by this
+    if false
       Stripe.api_key = STRIPE_TEST_SECRET_KEY
       token = params[:stripeToken]
       begin
@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
         flash[:message] = e
       end
     end
-    if true || charge && charge.paid #stripe disabled by this
+    if true || charge && charge.paid
       registrations.each(&:process)
     end
     CourseRegistrationMailer.new_registration(registrations).deliver_later
@@ -37,6 +37,7 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
+    @courses = @student.courses.order("created_at").page(params[:page])
   end
 
   def edit

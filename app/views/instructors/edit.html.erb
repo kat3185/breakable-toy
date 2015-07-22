@@ -1,6 +1,6 @@
 <% if current_user && (current_user.admin? || current_user.instructor == @instructor) %>
   <div class="small-12 columns">
-    <%= render partial: "instructor_form", locals: {instructor: @instructor} %>
+    <%= render partial: "instructor_form", locals: {instructor: @instructor, users: @users} %>
   </div>
   <% else %>
   You must be logged in as an administrator to edit an instructor.

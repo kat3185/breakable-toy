@@ -1,6 +1,6 @@
 <% if current_user && current_user.admin? %>
 <h1>Student Info</h1>
-
+<%= paginate @students %>
 <table>
   <tr>
     <th>Student</th>
@@ -17,7 +17,7 @@
       <td><%= button_to "Edit", edit_student_path(student), method: :get, class: "button tiny round" %></td>
       <td>
         <%= button_to 'Delete',
-          student_path(student.id),
+          student_path(student.id), data: { confirm: "Are you sure?" },
           method: :delete, class: "button tiny round" %>
       </td>
     </tr>

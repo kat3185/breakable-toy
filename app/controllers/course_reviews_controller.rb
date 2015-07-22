@@ -14,7 +14,7 @@ class CourseReviewsController < ApplicationController
   end
 
   def index
-    @course_reviews = CourseReview.all
+    @course_reviews = CourseReview.all.page(params[:page])
   end
 
   protected
