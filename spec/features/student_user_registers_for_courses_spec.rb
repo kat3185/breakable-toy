@@ -11,7 +11,7 @@ feature 'user registers for classes', %Q{
   [x] Registering for courses creates the appropriate course_registrations objects
 } do
 
-  pending "user with an associated student registers for a class", js: true do
+  scenario "user with an associated student registers for a class", js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -50,26 +50,25 @@ feature 'user registers for classes', %Q{
     visit courses_path
     click_button "Register for #{date.second.strftime('%B')} Classes"
 
-    expect(page).to have_button("Register for #{date.second.strftime('%B')} Classes")
-    expect(page).to have_button("Register for #{date2.second.strftime('%B')} Classes")
+    all('input[type=checkbox]').each do |checkbox|
+      checkbox.click
+    end
+    all('select#student_course_registrations__role').each do |menu|
+      menu.select("Follow")
+    end
 
-    select "Follow", from: "registration_holder[first_role]", match: :first
-    select "Lead", from: "registration_holder[second_role]", match: :first
-    select "Lead", from: "registration_holder[third_role]", match: :first
-    select "Follow", from: "registration_holder[fourth_role]", match: :first
+    fill_in "Credit Card Number", with: "4242424242424242"
+    fill_in "card_code", with: "123"
+    select "1 - January", from: "card_month"
+    select "2016", from: "card_year"
 
-    fill_in "Credit Card Number", with: "4242424242424242", match: :first
-    fill_in "card_code", with: "123", match: :first
-    select "1 - January", from: "card_month", match: :first
-    select "2016", from: "card_year", match: :first
-
-    click_button "Register for #{date.second.strftime('%B')} Classes"
-    expect(page).to have_content("Registration Created!")
-    kevin.reload
+    click_button "Submit"
+    sleep(5)
+    
     expect(kevin.courses.first).to be_a(Course)
     expect(kevin.course_registrations.first).to be_a(CourseRegistration)
     expect(kevin.courses.count).to eq(4)
     expect(kevin.course_registrations.count).to eq(4)
-
+    expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
 end

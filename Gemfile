@@ -59,3 +59,4 @@ gem 'foundation-rails'
 gem 'pry-rails', group: [:development, :test]
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'database_cleaner', group: [:development, :test]
+gem 'mailcatcher', group: [:development]

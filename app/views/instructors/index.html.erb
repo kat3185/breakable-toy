@@ -3,7 +3,7 @@
 
 <div class="instructor-title">
 <%= instructor.full_name %> <span><%= instructor.email %>
-  <% if current_user && current_user.admin? %>
+  <% if current_user && (current_user.admin? || current_user.instructor == instructor) %>
     <%= button_to 'Edit Instructor', edit_instructor_path(instructor), class: "button tiny round", method: :get %>
     <%= button_to 'Delete Instructor', instructor_path(instructor), method: :delete, class: "button tiny round" %></span>
   <%end%>

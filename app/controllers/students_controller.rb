@@ -11,18 +11,11 @@ class StudentsController < ApplicationController
   end
 
   def create
-    if current_user
-      @student = current_user.student
-    else
-      @student = Student.new(student_params)
-      @student.save
-    end
-    if @student.id
-      registrations = create_course_registrations(params[:student][:course_registrations])
-
+    @student = current_user_or_create(current_user, student_params)
+    registrations = create_course_registrations(params[:student][:course_registrations])
+    if false #stripe disabled by this
       Stripe.api_key = STRIPE_TEST_SECRET_KEY
       token = params[:stripeToken]
-
       begin
         charge = Stripe::Charge.create(
           amount: owed(registrations.count, params[:student][:discount][:current_student]), # amount in cents, again
@@ -31,16 +24,15 @@ class StudentsController < ApplicationController
           description: "Example charge"
         )
       rescue Stripe::CardError => e
+        flash[:message] = e
       end
-      if charge && charge.paid
-        registrations.each(&:process)
-      end
-      flash[:notice] = "Registeration complete!"
-      redirect_to student_path(@student)
-    else
-      flash[:notice] = e
-      render :new
     end
+    if true || charge && charge.paid #stripe disabled by this
+      registrations.each(&:process)
+    end
+    CourseRegistrationMailer.new_registration(registrations).deliver_later
+    flash[:notice] = "Registeration complete!"
+    redirect_to student_path(@student)
   end
 
   def show
@@ -78,14 +70,14 @@ class StudentsController < ApplicationController
   def create_course_registrations(course_list)
     registrations = Array.new
     course_list.each do |course|
-      if course[:course_id] != "0" && course[:role] != ""
-        registration = CourseRegistration.new(course_id: course[:course_id],
-                                              student: @student,
-                                              role: course[:role])
-        if registration.save
-          registrations << registration
-        end
+    if course[:course_id] != "0" && course[:role] != "0"
+      registration = CourseRegistration.new(course_id: course[:course_id],
+                                            student: @student,
+                                            role: course[:role])
+      if registration.save
+        registrations << registration
       end
+    end
     end
     registrations
   end
@@ -98,7 +90,11 @@ class StudentsController < ApplicationController
       return 5000 unless discount == 1
       return 4000
     else
-      return "ERROR"
+
     end
+  end
+
+  def current_user_or_create(current_user, student_params)
+    (current_user.student if current_user) || Student.find_or_create_by(student_params)
   end
 end
