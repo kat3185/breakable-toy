@@ -6,7 +6,7 @@
   <div class="medium-6 columns">
     <h5><%= weekday.first.strftime( '%A' )%></h5>
     <% if current_user && current_user.admin? && weekday.courses == [] %>
-    <%= button_to "Delete #{weekday.first.strftime( '%A' )}", meeting_date_path(weekday.id), method: :delete, class: "button tiny round" %>
+    <%= button_to "Delete #{weekday.first.strftime( '%A' )}", meeting_date_path(weekday.id), data: { confirm: "Are you sure?" }, method: :delete, class: "button tiny round" %>
     <%end%>
     <% weekday.courses.each do |course| %>
     <hr>
@@ -31,7 +31,7 @@
       <% if current_user && current_user.admin? %>
         <div class="course-buttons">
           <div class="inline"><%= button_to 'Edit Course', edit_course_path(course), class: "button tiny round", method: :get %></div>
-          <div class="inline"><%= button_to "Delete Course", course_path(course.id), method: :delete, class: "button tiny round" %></div>
+          <div class="inline"><%= button_to "Delete Course", course_path(course.id), data: { confirm: "Are you sure?" }, method: :delete, class: "button tiny round" %></div>
         </div>
       <%end%>
     </div>

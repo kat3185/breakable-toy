@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>New School Swing: Boston Lindy Hop and Swing Dance Instruction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 
@@ -10,7 +11,7 @@
 
 <div class="row">
 
-  <div class="small-12 medium-3 columns side-nav">
+  <div class="medium-3 columns side-nav">
     <%- flash.each do |key, value| -%>
       <div class="flash flash-<%= key %>">
         <%= value %>
@@ -55,7 +56,7 @@
       <tr><td>General</td><td>$90</td><td>$110</td></tr>
     </table>
   </div>
-  <div class="small-12 medium-9 end columns">
+  <div class="medium-9 end columns">
     <%= yield %>
   </div>
 

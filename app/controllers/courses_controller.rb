@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
-    @dates = [["", 0]] + MeetingDate.all.map { |a| [a.month_weekday, a.id] }
+    @dates = [["", 0]] + MeetingDate.order("created_at").limit(10).map { |a| [a.month_weekday, a.id] }
     @date = MeetingDate.new
   end
 
@@ -22,6 +22,10 @@ class CoursesController < ApplicationController
         @date = MeetingDate.find(params[:meeting_date])
       end
       if @course.save
+        course_instructors = params[:course][:instructor_ids]
+        course_instructors.each do |instructor_id|
+          CourseInstructor.create(course_id: @course.id, instructor_id: instructor_id)
+        end
         flash[:notice] = "Your course was created!"
         CourseMeeting.create(course: @course, meeting_date: @date)
         redirect_to courses_path
@@ -38,26 +42,31 @@ class CoursesController < ApplicationController
     @class = Course.find_by(id: params[:id])
     @course_review = CourseReview.new
     @course_reviews = CourseReview.where(course_id: params[:id])
+    @students = @class.students.page(params[:page])
   end
 
   def edit
     @course = Course.find_by(id: params[:id])
-    @dates = MeetingDate.all.map { |a| [a.month_weekday, a.id] }
+    @dates = [["", 0]] + MeetingDate.order("created_at").limit(10).map { |a| [a.month_weekday, a.id] }
     @date = MeetingDate.new
   end
 
   def update
     if current_user && current_user.admin?
       @course = Course.find(params[:id])
-      @course.update(course_params)
-      @date = MeetingDate.find(params[:meeting_date])
-      if @course.meeting_dates.first != @date
-        old_meeting = CourseMeeting.find_by(course: @course, meeting_date: @course.meeting_dates.first)
-        old_meeting.delete
-        new_meeting = CourseMeeting.new(course: @course, meeting_date: @date)
-        new_meeting.save
-      end
-      if @course.save
+      if @course.update(course_params)
+        course_instructors = params[:course][:instructor_ids]
+        CourseInstructor.where(course_id: params[:id]).each(&:destroy)
+        course_instructors.each do |instructor_id|
+          CourseInstructor.create(course_id: params[:id], instructor_id: instructor_id)
+        end
+        @date = MeetingDate.find(params[:meeting_date])
+        if @course.meeting_dates.first != @date
+          old_meeting = CourseMeeting.find_by(course: @course, meeting_date: @course.meeting_dates.first)
+          old_meeting.delete
+          new_meeting = CourseMeeting.new(course: @course, meeting_date: @date)
+          new_meeting.save
+        end
         flash[:notice] = "Your course is now more correct!"
         redirect_to courses_path
       else

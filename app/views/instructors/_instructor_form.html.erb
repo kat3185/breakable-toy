@@ -24,5 +24,10 @@
     <%= f.text_field :video_url %>
   </div>
 
+  <div>
+    <%= f.label :user_id %>
+    <%= f.select :user_id, users %>
+  </div>
+
   <%= f.submit "Submit Instructor", class:"button round" %>
 <% end %>

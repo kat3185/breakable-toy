@@ -34,7 +34,8 @@
         What do you think of our audition process? Thanks in advance!<br><br>
       <%= render partial: "course_review_form", locals: { course_review: @course_review, course: @class } %>
     </div>
-  <% if current_user && current_user.admin? %>
+  <% if current_user && (current_user.admin? || @class.instructors.include?(current_user.instructor)) %>
+  <%= paginate @students %>
     <table>
       <tr>
         <th>Student</th>
@@ -43,7 +44,7 @@
         <th>Paid?</th>
         <th>Delete</th>
       </tr>
-      <% @class.students.each do |student| %>
+      <% @students.each do |student| %>
         <tr>
           <td><%= link_to student.full_name, student_path(student.id) %></td>
           <td><%= student.email %></td>
@@ -51,7 +52,7 @@
           <td><%= student.course_registrations.where(course_id: params[:id]).first.paid %></td>
           <td>
             <%= link_to 'Delete',
-              course_registration_path(student.course_registrations.where(course_id: params[:id]).first.id),
+              course_registration_path(student.course_registrations.where(course_id: params[:id]).first.id), data: { confirm: "Are you sure?" },
               method: :delete %>
           </td>
         </tr>
@@ -59,7 +60,7 @@
     </table>
     <div class="course-buttons">
       <div class="inline"><%= button_to 'Edit Course', edit_course_path(@class), class: "button tiny round", method: :get %></div>
-      <div class="inline"><%= button_to "Delete Course", course_path(@class.id), method: :delete, class: "button tiny round" %></div>
+      <div class="inline"><%= button_to "Delete Course", course_path(@class.id), data: { confirm: "Are you sure?" }, method: :delete, class: "button tiny round" %></div>
     </div>
 
     <%if @course_reviews != [] %>

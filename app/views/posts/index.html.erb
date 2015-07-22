@@ -17,7 +17,7 @@
     </div>
     <% if current_user && current_user.admin? %>
       <%= button_to "Edit Post", edit_post_path(post), class: "button tiny round", method: :get %>
-      <%= button_to "Delete Post", post_path(post), method: :delete, class: "button tiny round" %>
+      <%= button_to "Delete Post", post_path(post), data: { confirm: "Are you sure?" }, method: :delete, class: "button tiny round" %>
     <% end %>
   <%end%>
 </div>

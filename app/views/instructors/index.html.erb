@@ -5,7 +5,7 @@
 <%= instructor.full_name %> <span><%= instructor.email %>
   <% if current_user && (current_user.admin? || current_user.instructor == instructor) %>
     <%= button_to 'Edit Instructor', edit_instructor_path(instructor), class: "button tiny round", method: :get %>
-    <%= button_to 'Delete Instructor', instructor_path(instructor), method: :delete, class: "button tiny round" %></span>
+    <%= button_to 'Delete Instructor', instructor_path(instructor), data: { confirm: "Are you sure?" }, method: :delete, class: "button tiny round" %></span>
   <%end%>
   </div>
 <div class="course-info">
@@ -29,7 +29,7 @@
 <% if current_user && current_user.admin? %>
 <div class="instructor-title"> Add a new instructor </div>
 <div>
-<%= render partial: "instructor_form", locals: {instructor: @instructor} %>
+<%= render partial: "instructor_form", locals: {instructor: @instructor, users: @users} %>
 </div>
 <%end%>
 </div>
