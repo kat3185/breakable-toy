@@ -2,7 +2,7 @@ class InstructorsController < ApplicationController
   def index
     @instructors = Instructor.all
     @instructor = Instructor.new
-    @users = [["", 0]] + User.order("email").map {|a| [a.email, a.id]}
+    @users = [["", 0]] + User.order("email").map { |a| [a.email, a.id] }
   end
 
   def create
@@ -22,7 +22,7 @@ class InstructorsController < ApplicationController
 
   def edit
     @instructor = Instructor.find(params[:id])
-    @users = [["", 0]] + User.order("email").map {|a| [a.email, a.id]}
+    @users = [["", 0]] + User.order("email").map { |a| [a.email, a.id] }
   end
 
   def update
