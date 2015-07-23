@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe MeetingDate, type: :model do
   let(:date) { FactoryGirl.create(:meeting_date) }
 
-  it 'had a working factory' do
+  it "had a working factory" do
     expect(date).to be_a(MeetingDate)
     expect(date.first).to be_a(Date)
     expect(date.second).to be_a(Date)
