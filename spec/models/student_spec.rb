@@ -14,11 +14,11 @@ RSpec.describe Student, type: :model do
     expect(student.full_name).to eq("#{student.first_name} #{student.last_name}")
   end
 
-  it "#assign_user(current_user)" do
-    user = FactoryGirl.create(:user)
-    student.assign_user(user)
-    
-    expect(student.user.email).to eq(user.email)
-    expect(user.student.first_name).to eq(student.first_name)
-  end
+  # it "#assign_user(current_user)" do
+  #   user = FactoryGirl.create(:user)
+  #   student.assign_user(user)
+  #
+  #   expect(student.user.email).to eq(user.email)
+  #   expect(user.student.first_name).to eq(student.first_name)
+  # end
 end

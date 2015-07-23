@@ -5,11 +5,11 @@
     <%= link_to "#{@class.title}: #{@class.description}", course_path(@class) %><br>
   </div>
   <div class="course-info">
-    <%= @class.venue.building_name %><br>
+    <%= @class.venue.building_name %><br>•
     <% @class.instructors.each do |instructor| %>
-      <%= instructor.full_name %>,
+      <%=link_to instructor.full_name, instructors_path %> •
       <%end%>
-      <b>more info</b>
+
     <br>
     <%= @class.meeting_dates.first.first.strftime('%B %e') %>,
     <%= @class.meeting_dates.first.second.strftime('%B %e') if @class.meeting_dates.first.second %>,

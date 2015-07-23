@@ -6,7 +6,7 @@
   <div class="small-12 columns">
     <% if current_user && current_user.student %>
     <%else%>
-    <div class="hide-for-small-only">
+    <div>
       <div class="medium-6 columns right-pad">
         <%= f.label :first_name %>
         <%= f.text_field :first_name %>
