@@ -19,11 +19,7 @@ feature 'create a new course', %Q{
 
   scenario "user visits the new courses page" do
     user = FactoryGirl.create(:user)
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
+    sign_in_as(user)
     visit new_course_path
 
     expect(page).to have_content("You must be logged in as an administrator to create a class!")
@@ -32,11 +28,8 @@ feature 'create a new course', %Q{
 
   scenario "admin visits the new courses page" do
     user = FactoryGirl.create(:user, :admin)
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
+    sign_in_as(user)
+    
     visit new_course_path
     expect(page).to have_no_content("You must be logged in as an administrator to create a class!")
     expect(page).to have_button("Submit Course")

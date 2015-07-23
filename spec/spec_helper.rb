@@ -1,7 +1,6 @@
 require 'coveralls'
 Coveralls.wear!('rails')
-
-
+require 'support/user_sign_in_helper.rb'
 
 RSpec.configure do |config|
 
@@ -16,5 +15,7 @@ RSpec.configure do |config|
   config.before :each do
     ActionMailer::Base.deliveries.clear
   end
+
+  config.include UserSignInHelper
 
 end

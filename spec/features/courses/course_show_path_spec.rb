@@ -21,27 +21,22 @@ feature 'visit a course show page', %Q{
 
   scenario "user visits the course show page" do
     user = FactoryGirl.create(:user)
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    sign_in_as(user)
+    visit course_path(course)
 
-    click_button 'Log in'
-    visit new_course_path
-
-    expect(page).to have_content("You must be logged in as an administrator to create a class!")
-    expect(page).to have_no_button("Submit Course")
+    expect(page).to have_content(course.title)
+    expect(page).to have_content(course.body)
+    expect(page).to have_no_button("Edit Course")
   end
 
   scenario "admin visits the course show page" do
     user = FactoryGirl.create(:user, :admin)
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    sign_in_as(user)
+    visit course_path(course)
 
-    click_button 'Log in'
-    visit new_course_path
-    expect(page).to have_no_content("You must be logged in as an administrator to create a class!")
-    expect(page).to have_button("Submit Course")
+    expect(page).to have_content(course.title)
+    expect(page).to have_content(course.body)
+    expect(page).to have_button("Edit Course")
   end
 
 end

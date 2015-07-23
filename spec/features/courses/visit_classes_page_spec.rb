@@ -35,5 +35,37 @@ feature 'visit courses page', %Q{
     expect(page).to have_content(Course.first.venue.building_name)
     expect(page).to have_content("Leads: ")
     expect(page).to have_button("Register for #{date.second.strftime('%B')} Classes")
+    expect(page).to have_no_button("Edit Course")
+  end
+
+  scenario 'visit the courses page' do
+    date = FactoryGirl.create(:meeting_date)
+    date2 = FactoryGirl.create(:meeting_date,
+                               first: Date.new(2015, 8, 4),
+                               second: Date.new(2015, 8, 11),
+                               third: Date.new(2015, 8, 18),
+                               fourth: Date.new(2015, 8, 25))
+    FactoryGirl.create_list(:course, 4, :with_instructors)
+
+    Course.all.each do |course|
+      FactoryGirl.create(:course_meeting, course: course, meeting_date: date)
+    end
+
+    FactoryGirl.create_list(:course, 4, :with_instructors)
+
+    Course.all.each do |course|
+      FactoryGirl.create(:course_meeting, course: course, meeting_date: date2)
+    end
+    admin = FactoryGirl.create(:user, :admin)
+    sign_in_as(admin)
+    visit courses_path
+
+    expect(page).to have_link(Course.first.title)
+    expect(page).to have_link(Course.last.title)
+    expect(page).to have_content(Course.first.instructors.first.full_name)
+    expect(page).to have_content(Course.first.venue.building_name)
+    expect(page).to have_content("Leads: ")
+    expect(page).to have_button("Register for #{date.second.strftime('%B')} Classes")
+    expect(page).to have_button("Edit Course")
   end
 end

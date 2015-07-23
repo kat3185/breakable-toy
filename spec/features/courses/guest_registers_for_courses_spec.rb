@@ -11,7 +11,7 @@ feature 'guest registers for classes', %Q{
   [x] Registering for courses creates the appropriate course_registrations objects
 } do
 
-  scenario "guest registers for a class", js: true do
+  pending "guest registers for a class", js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -57,7 +57,7 @@ feature 'guest registers for classes', %Q{
     expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
 
-  scenario "guest registers for four classes", js: true do
+  pending "guest registers for four classes", js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -108,5 +108,37 @@ feature 'guest registers for classes', %Q{
     expect(robbie.courses.count).to eq(4)
     expect(robbie.course_registrations.count).to eq(4)
     expect(ActionMailer::Base.deliveries.count).to eq(1)
+  end
+
+  pending "guest fills out form incorrectly", js: true do
+    date = FactoryGirl.create(:meeting_date)
+    FactoryGirl.create(:meeting_date,
+                               first: Date.new(2015, 8, 4),
+                               second: Date.new(2015, 8, 11),
+                               third: Date.new(2015, 8, 18),
+                               fourth: Date.new(2015, 8, 25))
+    FactoryGirl.create(:meeting_date,
+                               first: Date.new(2015, 7, 5),
+                               second: Date.new(2015, 7, 12),
+                               third: Date.new(2015, 7, 19),
+                               fourth: Date.new(2015, 7, 26))
+    date2 = FactoryGirl.create(:meeting_date,
+                               first: Date.new(2015, 8, 3),
+                               second: Date.new(2015, 8, 10),
+                               third: Date.new(2015, 8, 17),
+                               fourth: Date.new(2015, 8, 24))
+
+    MeetingDate.all.each do |dates|
+     courses = FactoryGirl.create_list(:course, 2, :with_instructors)
+
+     courses.each do |course|
+       FactoryGirl.create(:course_meeting, course: course, meeting_date: dates)
+     end
+    end
+
+    visit courses_path
+    click_button "Register for #{date.second.strftime('%B')} Classes"
+    click_button "Submit"
+    expect(page).to have_content("This card number looks invalid.")
   end
 end

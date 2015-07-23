@@ -97,6 +97,13 @@ FactoryGirl.define do
   end
 
   factory :course_review do
-    body "I am a course review!"  
+    body "I am a course review!"
+  end
+
+  factory :post do
+    title "New classes!"
+    body "Lorum ipsum suuuuuuum Lorum ipsum suuuuuuum Lorum ipsum suuuuuuum Lorum ipsum suuuuuuum Lorum ipsum suuuuuuum Lorum ipsum suuuuuuum Lorum ipsum suuuuuuum !!!!!!"
+
+    user
   end
 end

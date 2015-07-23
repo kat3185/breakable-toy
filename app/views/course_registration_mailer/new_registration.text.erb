@@ -1,6 +1,9 @@
 Hello <%= @registrations.first.student.first_name %>,
 
 You have successfully registered for <%= @registrations.first.course.meeting_dates.first.third.strftime("%B") %>'s classes:
+<% @registrations.each do |registration| %>
+<%= registration.course.title %>, 
+<%end%>
 
 We look forward to seeing you!
 
