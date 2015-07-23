@@ -1,20 +1,29 @@
+<div class="show-for-small-only">
+  <%= link_to 'Sign In', new_user_session_path %> or <%= link_to 'Sign Up', new_user_registration_path %> to view your classes.
+</div>
+
 <%= form_for student do |f|%>
   <div class="small-12 columns">
     <% if current_user && current_user.student %>
     <%else%>
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name %>
-
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name %>
-
+    <div class="hide-for-small-only">
+      <div class="medium-6 columns right-pad">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
+      </div>
+      <div class="medium-6 columns left-pad">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+      </div>
+    </div>
       <%= f.label :email%>
       <%= f.text_field :email %>
     <%end%>
 
     <%= fields_for "student[discount]" do |discount| %>
-      <%= discount.label "I qualify for a student discount (id required at door):", style: "float:left" %>
-      <%= discount.select :current_student, [["No", 0], ["Yes", 1]], style: "float:right" %>
+    I qualify for a student discount (Id required at door):<br>
+      <%= discount.check_box :current_student %>
+      <%= discount.label :current_student, "Yes" %>
     <%end%>
   </div>
   <% prefix = "student[course_registrations][]" %>
@@ -58,5 +67,4 @@
   <div class="small-12 columns">
     <%= f.submit 'Submit', class: "button round", id: "pay_now" %>
   </div>
-
 <%end%>

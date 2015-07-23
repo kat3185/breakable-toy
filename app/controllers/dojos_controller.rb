@@ -1,4 +1,4 @@
-class DojosController < ActionController::Base
+class DojosController < ApplicationController
   def index
   end
 end

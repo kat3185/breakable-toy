@@ -2,14 +2,14 @@ $dark-creme: #B69F9F;
 $medium-creme: #DDCDCD;
 $light-creme: #FFEDED;
 $creme-white: #FFF8F8;
-$medium-yellow: #DEDED0;
+
 $lighter-yellow: #FFFFF9;
 $mid-red: #770000;
 $dark-red: #510000;
 $light-red: #990808;
 $lighter-red: #B92020;
 $red: #ff0000;
-
+$medium-yellow: #DEDED0;
 $side-nav-background: $medium-yellow;
 
 body {
@@ -23,6 +23,7 @@ body {
 
 .course-info {
   font-size: 80%;
+  padding-left: 15px;
 }
 
 .course-info span img {
@@ -40,7 +41,6 @@ body {
 .instructor-title span {
   font-size: 70%;
   font-weight: normal;
-  float: right;
   padding-top: 8px;
 }
 
@@ -66,6 +66,7 @@ body {
 }
 
 .side-nav {
+  padding-top: 0;
   background-color: $side-nav-background;
   text-align: center;
 }
@@ -116,4 +117,21 @@ table.center {
 
 .card-errors {
   color: $red;
+}
+
+.center {
+  text-align: center;
+}
+
+.left-pad {
+  padding-right: 0;
+}
+
+.right-pad {
+  padding-left: 0;
+}
+
+.no-padding {
+  padding-right: 0;
+  padding-left: 0;
 }

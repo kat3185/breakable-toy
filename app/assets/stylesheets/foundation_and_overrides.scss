@@ -129,6 +129,8 @@ $body-bg: $lighter-yellow;
 // $body-font-family: $font-family-sans-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
+$medium-yellow: #DEDED0;
+$side-nav-background: $lighter-yellow;
 
 // We use this to control font-smoothing
 // $font-smoothing: antialiased;
@@ -333,15 +335,15 @@ $header-top-margin: 1rem;
 // $include-html-accordion-classes: $include-html-classes;
 
 // $accordion-navigation-padding: rem-calc(16);
-// $accordion-navigation-bg-color: $silver;
+$accordion-navigation-bg-color: $medium-yellow;
 // $accordion-navigation-hover-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -5%);
-// $accordion-navigation-active-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -3%);
+$accordion-navigation-active-bg-color: $primary-color;
 // $accordion-navigation-font-color: $jet;
 // $accordion-navigation-font-size: rem-calc(16);
 // $accordion-navigation-font-family: $body-font-family;
 
 // $accordion-content-padding: ($column-gutter/2);
-// $accordion-content-active-bg-color: $white;
+$accordion-content-active-bg-color: $medium-yellow;
 
 // 02. Alert Boxes
 // - - - - - - - - - - - - - - - - - - - - - - - - -
