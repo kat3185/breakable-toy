@@ -11,7 +11,6 @@ require 'capybara/rspec'
 require 'capybara/rails'
 require "database_cleaner"
 
-
 Capybara.default_selector = :css
 
 ActiveRecord::Migration.maintain_test_schema!

@@ -1,12 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'visit students index', %Q{
-  As a user
-  I want to see information about instructors
-  So I can learn about who the teachers are
-  Acceptance Criteria:
-  [x] User can view a page with classes on it
-  [x] Users can start registration process from this page
+feature "visit students index", %Q{
+  As an admin
+  I want to see a list of students
+  So I can look up relevant information
 } do
 
   let!(:student) { FactoryGirl.create(:student) }

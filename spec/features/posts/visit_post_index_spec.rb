@@ -1,12 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'visit posts index', %Q{
+feature "visit posts index", %Q{
   As a user
-  I want to see information about instructors
-  So I can learn about who the teachers are
-  Acceptance Criteria:
-  [x] User can view a page with classes on it
-  [x] Users can start registration process from this page
+  I want to see recent announcements
+  So I can what is happening with the studio
 } do
   let!(:admin) { FactoryGirl.create(:user, :admin) }
   let!(:post) { FactoryGirl.create(:post) }

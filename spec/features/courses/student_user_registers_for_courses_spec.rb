@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'user registers for classes', %Q{
+feature "user registers for classes", %Q{
   As a user
   I want to be able to register for classes
   So I can learn more about swing dancing

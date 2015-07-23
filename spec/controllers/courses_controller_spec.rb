@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CoursesController, type: :controller do
   it "#create_dates" do

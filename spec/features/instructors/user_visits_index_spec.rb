@@ -1,12 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'visit instructors index', %Q{
+feature "visit instructors index", %Q{
   As a user
   I want to see information about instructors
   So I can learn about who the teachers are
-  Acceptance Criteria:
-  [x] User can view a page with classes on it
-  [x] Users can start registration process from this page
 } do
 
   scenario "visit instructors index" do

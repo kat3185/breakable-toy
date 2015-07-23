@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'visit courses page', %Q{
+feature "visit courses page", %Q{
   As a user
   I want to see information about upcoming classes
   So I can decide if I want to take them
@@ -9,7 +9,7 @@ feature 'visit courses page', %Q{
   [x] Users can start registration process from this page
 } do
 
-  scenario 'visit the courses page' do
+  scenario "visit the courses page" do
     date = FactoryGirl.create(:meeting_date)
     date2 = FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -38,7 +38,7 @@ feature 'visit courses page', %Q{
     expect(page).to have_no_button("Edit Course")
   end
 
-  scenario 'visit the courses page' do
+  scenario "visit the courses page" do
     date = FactoryGirl.create(:meeting_date)
     date2 = FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),

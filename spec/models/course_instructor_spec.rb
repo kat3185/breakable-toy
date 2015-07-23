@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CourseInstructor, type: :model do
   it "has a working factory" do

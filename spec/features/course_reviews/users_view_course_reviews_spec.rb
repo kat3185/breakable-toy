@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'user views course reviews', %Q{
-  As an authenticated user
-  I want to sign out
-  So that my identity is forgotten about on the machine I'm using
+feature "user views course reviews", %Q{
+  As an admin
+  I want to view course reviews
+  So that I can recieve useful feedback from students
 } do
 
   let!(:course_review) { FactoryGirl.create(:course_review) }

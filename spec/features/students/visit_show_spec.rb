@@ -1,14 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'visit student show', %Q{
+feature "visit student show", %Q{
   As a user
-  I want to see information about instructors
-  So I can learn about who the teachers are
-  Acceptance Criteria:
-  [x] User can view a page with classes on it
-  [x] Users can start registration process from this page
+  I want to see information about my classes
+  So I can track what classes I have taken
 } do
-
   let!(:student) { FactoryGirl.create(:student) }
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:user, :admin) }
@@ -42,5 +38,4 @@ feature 'visit student show', %Q{
     expect(page).to have_no_content("Check your e-mail for confirmation of registration,")
     expect(page).to have_content(student.first_name)
   end
-
 end

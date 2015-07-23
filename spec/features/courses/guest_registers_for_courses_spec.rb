@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 feature 'guest registers for classes', %Q{
   As a guest

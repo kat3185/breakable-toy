@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CourseRegistration, type: :model do
-  it 'has a working factory' do
+  it "has a working factory" do
     reg = FactoryGirl.create(:course_registration)
 
     expect(reg).to be_a(CourseRegistration)

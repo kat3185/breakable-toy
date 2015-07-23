@@ -1,12 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'visit posts new', %Q{
-  As a user
-  I want to see information about instructors
-  So I can learn about who the teachers are
-  Acceptance Criteria:
-  [x] User can view a page with classes on it
-  [x] Users can start registration process from this page
+feature "visit posts new", %Q{
+  As an admin
+  I want to create a new post
+  So I can share with the community what the studio is up to
 } do
   let!(:admin) { FactoryGirl.create(:user, :admin) }
   let!(:post) { FactoryGirl.create(:post) }
