@@ -9,57 +9,105 @@
 </head>
 <body>
 
-<div class="row">
-
-  <div class="medium-3 columns side-nav">
-    <%- flash.each do |key, value| -%>
-      <div class="flash flash-<%= key %>">
-        <%= value %>
-      </div>
-    <%- end -%>
-    <a href=<%= root_path %> id="logo"><%= image_tag "nsslogo.png", size: '300', alt: "New School Swing" %></a>
-
-    <ul class="side-nav">
-      <li><%= link_to 'Home', root_path %></li>
-      <li><%= link_to 'Classes', courses_path %></li>
-      <li><%= link_to 'Dojo', dojo_path %></li>
-      <li><%= link_to 'Instructors', instructors_path %></li>
-      <li><%= link_to 'Directions', venues_path %></li>
-      <%- if current_user -%>
-        <% if current_user.student %>
-          <li><%= link_to "My Classes", student_path(current_user.student) %></li>
-        <%end%>
-        <% if current_user.admin? %>
-          <li><%= link_to 'New Post', new_post_path %></li>
-          <li><%= link_to 'New Course', new_course_path %></li>
-          <li><%= link_to "Student Feedback", course_reviews_path %></li>
-          <li><%= link_to 'Students', students_path %></li>
-        <% end %>
-        <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
-        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-      <%- else -%>
-        <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-        <li><%= link_to 'Sign In', new_user_session_path %></li>
+  <div class="row">
+    <div class="medium-3 columns side-nav">
+      <%- flash.each do |key, value| -%>
+        <div class="flash flash-<%= key %>">
+          <%= value %>
+        </div>
       <%- end -%>
-    </ul><hr>
-    <h3>Class Pricing</h3>
-    Single Series
-    <table align="center" class="center">
-      <tr><th></th><th>Online</th><th>At the door</th></tr>
-      <tr><td>Student</td><td>$40</td><td>$50</td></tr>
-      <tr><td>General</td><td>$50</td><td>$60</td></tr>
-    </table>
-    Multiple Series
-    <table align="center" class="center">
-      <tr><th></th><th>Online</th><th>At the door</th></tr>
-      <tr><td>Student</td><td>$70</td><td>$90</td></tr>
-      <tr><td>General</td><td>$90</td><td>$110</td></tr>
-    </table>
+      <a href=<%= root_path %> id="logo"><%= image_tag "nsslogo.png", size: '300', alt: "New School Swing" %></a>
+      <div class="show-for-small-only">
+      <ul class="accordion" data-accordion>
+        <li class="accordion-navigation">
+          <a href="#panel1a">Navigation</a>
+          <div id="panel1a" class="content">
+            <ul class="side-nav">
+              <li><%= link_to 'Home', root_path %></li>
+              <li><%= link_to 'Classes', courses_path %></li>
+              <li><%= link_to 'Dojo', dojos_path %></li>
+              <li><%= link_to 'Instructors', instructors_path %></li>
+              <li><%= link_to 'Directions', venues_path %></li>
+              <%- if current_user -%>
+                <% if current_user.student %>
+                  <li><%= link_to "My Classes", student_path(current_user.student) %></li>
+                <%end%>
+                <% if current_user.admin? %>
+                  <li><%= link_to 'New Post', new_post_path %></li>
+                  <li><%= link_to 'New Course', new_course_path %></li>
+                  <li><%= link_to "Student Feedback", course_reviews_path %></li>
+                  <li><%= link_to 'Students', students_path %></li>
+                <% end %>
+                <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+            <%- else -%>
+              <li><%= link_to 'Sign In', new_user_session_path %></li>
+              <li data-tooltip aria-haspopup="true" class="has-tip" data-options="show_on:medium" title="Sign up to view all your classes!"><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <%- end -%>
+          </ul>
+        </div>
+      </li>
+      <li class="accordion-navigation">
+        <a href="#panel2a">Pricing</a>
+        <div id="panel2a" class="content">
+          <h3>Class Pricing</h3>
+              Single Series
+          <table align="center" class="center">
+            <tr><th></th><th>Online</th><th>At the door</th></tr>
+            <tr><td>Student</td><td>$40</td><td>$50</td></tr>
+            <tr><td>General</td><td>$50</td><td>$60</td></tr>
+          </table>
+            Multiple Series
+          <table align="center" class="center">
+            <tr><th></th><th>Online</th><th>At the door</th></tr>
+            <tr><td>Student</td><td>$70</td><td>$90</td></tr>
+            <tr><td>General</td><td>$90</td><td>$110</td></tr>
+          </table>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="hide-for-small-only">
+  <ul class="side-nav">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Classes', courses_path %></li>
+    <li><%= link_to 'Dojo', dojos_path %></li>
+    <li><%= link_to 'Instructors', instructors_path %></li>
+    <li><%= link_to 'Directions', venues_path %></li>
+    <%- if current_user -%>
+      <% if current_user.student %>
+        <li><%= link_to "My Classes", student_path(current_user.student) %></li>
+      <%end%>
+      <% if current_user.admin? %>
+        <li><%= link_to 'New Post', new_post_path %></li>
+        <li><%= link_to 'New Course', new_course_path %></li>
+        <li><%= link_to 'Students', students_path %></li>
+      <% end %>
+      <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
+      <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+    <%- else -%>
+      <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+      <li><%= link_to 'Sign In', new_user_session_path %></li>
+    <%- end -%>
+  </ul>
+  <h3>Class Pricing</h3>
+  Single Series
+  <table class="side-nav center-table">
+    <tr><th></th><th>Online</th><th>At the door</th></tr>
+    <tr><td>Student</td><td>$40</td><td>$50</td></tr>
+    <tr><td>General</td><td>$50</td><td>$60</td></tr>
+  </table>
+  Multiple Series
+  <table class="side-nav center-table">
+    <tr><th></th><th>Online</th><th>At the door</th></tr>
+    <tr><td>Student</td><td>$70</td><td>$90</td></tr>
+    <tr><td>General</td><td>$90</td><td>$110</td></tr>
+  </table>
+</div>
   </div>
   <div class="medium-9 end columns">
     <%= yield %>
   </div>
-
 </div>
   <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>

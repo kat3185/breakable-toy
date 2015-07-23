@@ -4,18 +4,17 @@ Rails.application.routes.draw do
              :controllers => { :registrations => "my_devise/registrations" }
 
   resources :courses
-  resources :course_registrations, only: [:destroy]
+
   resources :instructors, only: [:index, :create, :edit, :update, :destroy]
   resources :venues, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :students, only: [:index, :update, :edit, :destroy, :new, :create]
-  
-  resources :students, only: [:show] do
-    resources :course_registrations, only: [:create]
-  end
+
+  resources :students, only: [:show]
   resources :course_reviews
 
   resources :posts, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :meeting_dates, only: [:destroy]
+  resources :course_registrations, only: [:destroy]
 
-  get "dojo", to: "dojos#index"
+  resources :dojos, only: [:index]
 end

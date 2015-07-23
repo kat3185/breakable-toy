@@ -19,7 +19,14 @@
       <% course.instructors.each do |instructor| %>
         <%= instructor.full_name %>,
         <%end%>
-        <b>more info</b>
+        <a href="#" data-reveal-id="myModal">more info</a>
+
+        <div id="myModal" class="reveal-modal center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle" class="course-title center"><%= course.title%></h2>
+          <p class="lead" class="course-title center"><%= course.description%></p>
+          <p class="course-info"><%= course.body %></p>
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        </div>
       <br>
       <%= course.meeting_dates.first.first.strftime('%B %e') %>,
       <%= course.meeting_dates.first.second.strftime('%B %e') if course.meeting_dates.first.second %>,
