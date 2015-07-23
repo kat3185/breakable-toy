@@ -11,7 +11,7 @@ feature 'guest registers for classes', %Q{
   [x] Registering for courses creates the appropriate course_registrations objects
 } do
 
-  pending "guest registers for a class", js: true do
+  scenario "guest registers for a class", js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -57,7 +57,7 @@ feature 'guest registers for classes', %Q{
     expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
 
-  pending "guest registers for four classes", js: true do
+  scenario "guest registers for four classes", js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),

@@ -2,10 +2,10 @@ var e = document.getElementById("student_discount_current_student");
 
 $('#new_student :checkbox').change(function() {
   var discount = e.checked;
-  if (discount == false) {
+  if (discount === false) {
     var singleClass = "50";
     var doubleClass = "90";
-  } else if (discount == true) {
+  } else if (discount === true) {
     var singleClass = "40";
     var doubleClass = "70";
   }

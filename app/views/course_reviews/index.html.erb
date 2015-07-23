@@ -1,8 +1,12 @@
-<%= paginate @course_reviews %>
-<% @course_reviews.each do |review| %>
-  <div>
-    <%= review.course.title if review.course %><br>
-    <%= review.name if review.name %><br>
-    <%= review.created_at %>: <%= review.body %>
-  </div><hr>
+<% if current_user && current_user.admin? %>
+  <%= paginate @course_reviews %>
+  <% @course_reviews.each do |review| %>
+    <div>
+      <%= review.course.title if review.course %><br>
+      <%= review.name if review.name %><br>
+      <%= review.created_at %>: <%= review.body %>
+    </div><hr>
+  <%end%>
+<%else%>
+  You must be logged in as an administrator to view this page.
 <%end%>

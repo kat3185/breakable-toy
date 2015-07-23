@@ -5,6 +5,10 @@ FactoryGirl.define do
     sequence(:email) {|n| "user#{n}@example.com" }
     password 'password'
     password_confirmation 'password'
+
+    trait :admin do
+      role "admin"
+    end
   end
 
   factory :venue do
@@ -90,5 +94,9 @@ FactoryGirl.define do
   factory :course_instructor do
     course
     instructor
+  end
+
+  factory :course_review do
+    body "I am a course review!"  
   end
 end
