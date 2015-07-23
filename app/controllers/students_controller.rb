@@ -30,7 +30,7 @@ class StudentsController < ApplicationController
     if true || charge && charge.paid
       registrations.each(&:process)
     end
-    CourseRegistrationMailer.new_registration(registrations).deliver_later
+    #CourseRegistrationMailer.new_registration(registrations).deliver_later
     flash[:notice] = "Registeration complete!"
     redirect_to student_path(@student)
   end
