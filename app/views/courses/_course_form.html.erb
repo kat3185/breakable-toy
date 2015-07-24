@@ -35,8 +35,8 @@
     <% prefix = "course[meeting_date][]" %>
     <%= fields_for prefix, date do |reg_form| %>
       <p> <h6> New Date </h6>
-        <%= reg_form.label "First Date (YYYY-MM-DD)" %>
-        <%= reg_form.text_field :first %>
+        <%= reg_form.label "First Date" %>
+        <%= reg_form.date_field :first %>
       </p>
     <%end%>
   </div>
