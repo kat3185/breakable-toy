@@ -100,11 +100,10 @@ class CoursesController < ApplicationController
 
   def create_dates(first_date)
     date = MeetingDate.new
-    first = Date.parse(first_date)
-    date.first = first
-    date.second = first.next_day(7)
-    date.third = first.next_day(14)
-    date.fourth = first.next_day(21)
+    date.first = first_date
+    date.second = date.first.next_day(7)
+    date.third = date.first.next_day(14)
+    date.fourth = date.first.next_day(21)
     date
   end
 end

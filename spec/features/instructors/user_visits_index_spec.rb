@@ -28,4 +28,24 @@ feature "visit instructors index", %Q{
     expect(page).to have_button("Edit Instructor")
     expect(page).to have_content("Add a new instructor")
   end
+
+  scenario "admin can add a new instructor" do
+    FactoryGirl.create_list(:instructor, 2)
+    admin = FactoryGirl.create(:user, :admin)
+    sign_in_as(admin)
+    expect(Instructor.all.count).to eq(2)
+
+    visit instructors_path
+    expect(page).to have_content(Instructor.first.full_name)
+    expect(page).to have_content(Instructor.last.full_name)
+    expect(page).to have_content(Instructor.first.body)
+    expect(page).to have_button("Edit Instructor")
+    expect(page).to have_content("Add a new instructor")
+    fill_in "Full name", with: "Rob McBob"
+    fill_in "Body", with: "Rob McBob is not real, but I will make him real by running this test."
+    fill_in "Email", with: "robmcbob@bob.rob"
+    select admin.email, from: "User"
+    click_button "Submit Instructor"
+    expect(Instructor.all.count).to eq(3)
+  end
 end
