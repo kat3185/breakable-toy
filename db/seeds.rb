@@ -5,7 +5,7 @@ Course.find_or_create_by(title: "Lindy 1A", description: "Eight Count!", time: "
 Course.find_or_create_by(title: "Lindy 2A", description: "Charleston Variations!", time: "8:30-9:30pm", venue_id: 1)
 Course.find_or_create_by(title: "Lindy 1B", description: "Basic Charleston!", time: "7:30-8:30pm", venue_id: 1)
 Course.find_or_create_by(title: "Lindy 2B", description: "Mixing 6 and 8 Count", time: "8:30-9:30pm", venue_id: 1)
-Course.find_or_create_by(title: "Lindy 1A second", description: "Eight Count!", time: "7:30-8:30pm", venue_id: 1)
+Course.find_or_create_by(title: "Lindy 1A second", description: "Eight Count Lindy!", time: "7:30-8:30pm", venue_id: 1)
 Course.find_or_create_by(title: "Lindy 2C", description: "Swingout Variations!", time: "8:30-9:30pm", venue_id: 1)
 
 Course.find_or_create_by(title: "Lindy 2C", description: "Swingout Variations!", time: "7:00-8:00pm", venue_id: 1)
@@ -42,8 +42,8 @@ CourseRegistration.find_or_create_by(course_id: 4, student_id: 1, role: "Lead", 
 puts "Created registrations."
 
 Course.all.each do |course|
-  CourseInstructor.find_or_create_by(course: course, instructor_id: 1)
-  CourseInstructor.find_or_create_by(course: course, instructor_id: 2)
+  CourseInstructor.find_or_create_by(course: course, instructor_id: Instructor.first.id)
+  CourseInstructor.find_or_create_by(course: course, instructor_id: Instructor.second.id)
 end
 puts "Created course instructors."
 
@@ -128,5 +128,5 @@ Student.find_or_create_by(first_name: "Laule't'a", last_name: "Kaaaahn", email: 
 puts "Created users."
 
 Post.find_or_create_by(title: "July Classes Up!", body: "Check out our exciting July course offerings and register today!", user: user1)
-Post.find_or_create_by(title: "August Classes Up!", body: "Check out our exciting August course offerings and register today!.", user: user1)
+Post.find_or_create_by(title: "August Classes Up!", body: "August course offerings are up!  Check them out and register today!", user: user1)
 puts "Created posts."

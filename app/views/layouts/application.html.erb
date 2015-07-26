@@ -27,7 +27,7 @@
               <li><%= link_to 'Classes', courses_path %></li>
               <li><%= link_to 'Dojo', dojos_path %></li>
               <li><%= link_to 'Instructors', instructors_path %></li>
-              <li><%= link_to 'Directions', venues_path %></li>
+              <li><%= link_to 'Locations', venues_path %></li>
               <%- if current_user -%>
                 <% if current_user.student %>
                   <li><%= link_to "My Classes", student_path(current_user.student) %></li>

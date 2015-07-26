@@ -10,7 +10,7 @@ class CourseReviewsController < ApplicationController
     else
       flash[:message] = "We encountered a problem with saving your review! Sorry!"
     end
-    redirect_to courses_path
+    redirect_to posts_path
   end
 
   def index
