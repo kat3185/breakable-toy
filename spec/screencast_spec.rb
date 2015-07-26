@@ -97,7 +97,6 @@ feature "user registers for classes", %Q{
     select "Follow", from: "Role:", match: :first
 
     click_button "Submit"
-    expect(page).to have_content("This card number looks invalid.")
     sleep(1)
     fill_in "Credit Card Number", with: "4242424242424242"
     fill_in "card_code", with: "123"
