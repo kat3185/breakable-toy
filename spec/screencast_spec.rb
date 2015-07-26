@@ -11,7 +11,7 @@ feature "user registers for classes", %Q{
   [x] Registering for courses creates the appropriate course_registrations objects
 } do
 
-  scenario "user with an associated student registers for a class", js: true do
+  pending "user with an associated student registers for a class", js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -66,7 +66,7 @@ feature "user registers for classes", %Q{
     expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
 
-  scenario "guest registers for a class", js: true do
+  pending "guest registers for a class", js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -118,7 +118,7 @@ feature "user registers for classes", %Q{
     expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
 
-  scenario "guest registers for four classes", js: true do
+  pending "guest registers for four classes", js: true do
     date = FactoryGirl.create(:meeting_date)
     FactoryGirl.create(:meeting_date,
                                first: Date.new(2015, 8, 4),
@@ -166,14 +166,14 @@ feature "user registers for classes", %Q{
     sleep(5)
   end
 
-  scenario "user visits the new courses page" do
+  pending "user visits the new courses page" do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit new_course_path
     sleep(5)
   end
 
-  scenario "admin visits the new courses page", js: true do
+  pending "admin visits the new courses page", js: true do
     admin = FactoryGirl.create(:user, :admin)
     sign_in_as(admin)
     sleep(1)
@@ -220,7 +220,7 @@ feature "user registers for classes", %Q{
     sleep(5)
   end
 
-  scenario "admin can add a new instructor", js: true do
+  pending "admin can add a new instructor", js: true do
     FactoryGirl.create(:instructor)
     admin = FactoryGirl.create(:user, :admin)
     sign_in_as(admin)
