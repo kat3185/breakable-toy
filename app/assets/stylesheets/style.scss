@@ -1,8 +1,3 @@
-$dark-creme: #B69F9F;
-$medium-creme: #DDCDCD;
-$light-creme: #FFEDED;
-$creme-white: #FFF8F8;
-
 $lighter-yellow: #FFFFF9;
 $mid-red: #770000;
 $dark-red: #510000;
@@ -11,6 +6,8 @@ $lighter-red: #B92020;
 $red: #ff0000;
 $medium-yellow: #DEDED0;
 $side-nav-background: $medium-yellow;
+$month-background-color: $lighter-yellow;
+$card-error-text-color: $red;
 
 body {
   margin-top: 1em;
@@ -66,7 +63,7 @@ body {
 }
 
 .month-courses {
-  background-color: $lighter-yellow;
+  background-color: $month-background-color;
 }
 
 .side-nav {
@@ -82,16 +79,6 @@ body {
   width: 15em;
   background: $side-nav-background; // the color you want the sidebar to be
   position: absolute;
-}
-
-.bottom-avatar-text {
-  bottom: 20px;
-  font-size: 1em !important;
-  height: 52px;
-  left: 50px;
-  padding-top: 7px;
-  position: fixed;
-  width: 60px;
 }
 
 .post-title {
@@ -120,7 +107,7 @@ table.center {
 }
 
 .card-errors {
-  color: $red;
+  color: $card-error-text-color;
 }
 
 .center {
@@ -138,4 +125,10 @@ table.center {
 .no-padding {
   padding-right: 0;
   padding-left: 0;
+}
+
+.form-checkbox {
+  float:right;
+  margin-top: 5px !important;
+  margin-bottom: 0px !important;
 }
