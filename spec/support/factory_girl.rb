@@ -50,8 +50,10 @@ FactoryGirl.define do
 
   factory :instructor do
     full_name "Cari Meisel"
-    body "Very very very short."
+    body "Cari got her start dancing in 2009 when she accidentally tried out for Penn’s West Philly Swingers dance troupe. She was hooked from the first triple step, and hasn't stopped swinging out since! After graduating, she became involved in teaching and organizing for Lindy and Blues in Philadelphia, and picked up a serious dance-travel bug. In 2013, Cari moved to Boston to start graduate school, and, of course, to do more dancing. She loves creativity, comfortable connection, and communication in all her dances, and would be happy to talk your ear off any time about dancing, teaching ideas, and/or ways to practice dance at home alone and not wake your neighbors."
     email "Cmeis@nss.com"
+    photo_url "cari.jpg"
+    video_url "https://www.youtube.com/embed/Q2a5WcSuh4g"
 
     trait :with_course do
       after(:create) do |instructor|
