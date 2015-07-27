@@ -9,7 +9,7 @@ $('#new_student :checkbox').change(function() {
     var singleClass = "40";
     var doubleClass = "70";
   }
-  var checkCount = $("[type='checkbox']:checked").length;
+  var checkCount = $(".field input:checked").length;
   if (checkCount < 1){
     $( "span.running-total" ).text("0");
   } else if (checkCount == 1){
