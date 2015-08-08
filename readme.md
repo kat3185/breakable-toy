@@ -1,5 +1,3 @@
-[ ![Codeship Status for kat3185/breakable-toy](https://codeship.com/projects/6de31910-0bde-0133-93f5-0eda17052741/status?branch=master)](https://codeship.com/projects/90954)
-
 ##New School Swing Website:
 This app is a website for the swing dancing studio New School Swing.  A visitor can navigate the site to learn about swing dancing, the instructors who teach with the studio, and what classes we are offering.  Both guests and registered users can register and pay for classes, and will recieve email confirmation on completion of registration.
 
