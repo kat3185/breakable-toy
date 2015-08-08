@@ -13,3 +13,5 @@
 /tmp
 /coverage
 .env
+readme.md
+README.rdoc
